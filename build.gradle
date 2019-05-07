@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '2.0.4'
 }
 
 group 'uk.ac.cam.cl.interactiondesign'
@@ -13,4 +15,16 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'com.mashape.unirest', name: 'unirest-java', version: '1.4.9'
 }
+
+mainClassName = "uk.ac.cam.cl.interactiondesign.group8.Main"
+
+shadowJar {
+    archiveName = 'CleverWeather.jar'
+    classifier = 'deploy'
+}
+
+apply plugin: 'java'
+sourceCompatibility = 1.10
+targetCompatibility = 1.10
