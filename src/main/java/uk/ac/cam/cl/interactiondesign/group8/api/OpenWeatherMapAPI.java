@@ -13,9 +13,6 @@ public class OpenWeatherMapAPI implements WeatherAPI {
 
     private LocationProvider locationProvider;
 
-    private int previousTemperature = Integer.MIN_VALUE;
-    private long previousTemperatureTimestamp = 0;
-
     public OpenWeatherMapAPI(LocationProvider locationProvider) {
         this.locationProvider = locationProvider;
     }
@@ -28,12 +25,12 @@ public class OpenWeatherMapAPI implements WeatherAPI {
                 .getBody();
     }
 
-    public JsonNode getCurrentWeather(String location) throws UnirestException {
+    private JsonNode getCurrentWeather(String location) throws UnirestException {
         return makeAuthenticatedRequest("weather", Map.of("q", location));
     }
 
     @Override
-    public int getCurrentTemperature() {
+    public int getCurrentTemperature() throws UnableToGetWeatherException {
         try {
             JsonNode currentWeather = getCurrentWeather(locationProvider.getCurrentLocation());
 
@@ -42,9 +39,7 @@ public class OpenWeatherMapAPI implements WeatherAPI {
             previousTemperatureTimestamp = System.currentTimeMillis();
             return previousTemperature = (int) Math.floor(kelvinToCelsius(kelvinTemp));
         } catch (UnirestException e) {
-            // This will be thrown if it is unable to make the request
-            // Or if the JSON doesn't have the required data
-            return previousTemperature;
+            throw new UnableToGetWeatherException(e);
         }
     }
 }
