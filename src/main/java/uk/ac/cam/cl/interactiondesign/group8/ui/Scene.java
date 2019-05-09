@@ -1,14 +1,5 @@
 package uk.ac.cam.cl.interactiondesign.group8.ui;
 
-public enum EWeather {
-	NONE,
-	CLOUDY,
-	RAIN,
-	STORM,
-	SNOW,
-	FOG
-}
-
 public class Scene {
 	private ICharacter character;
 	private Temperature temperature;
@@ -23,8 +14,8 @@ public class Scene {
 	public WindSock getWindSock() { return windSock; }
 
 	// Sets the dynamic weather widget
-	public void setWeather(EWeather weather) {
-		switch (weather)
+	public void setWeather(EWeather w) {
+		switch (w)
 		{
 		case CLOUDY:
 			weather = new Cloud(this);

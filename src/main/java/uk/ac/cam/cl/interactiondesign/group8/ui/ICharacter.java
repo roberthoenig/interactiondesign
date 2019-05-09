@@ -1,14 +1,6 @@
-package uk.ac.cam.cl.interractiondesign.group8.ui;
+package uk.ac.cam.cl.interactiondesign.group8.ui;
 
-public enum EClothing {
-	SUNGLASSES,
-	UMBRELLA,
-	COAT,
-	SKIS,
-	JUMPER
-}
-
-public interface Character {
+public interface ICharacter {
 
 		// Creates a speech bubble with the message
 		public void displayMessage(String message);
