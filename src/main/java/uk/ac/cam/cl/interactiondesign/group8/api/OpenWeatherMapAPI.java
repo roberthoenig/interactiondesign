@@ -1,10 +1,12 @@
 package uk.ac.cam.cl.interactiondesign.group8.api;
 
-import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.Map;
 
 public class OpenWeatherMapAPI implements WeatherAPI {
@@ -36,8 +38,46 @@ public class OpenWeatherMapAPI implements WeatherAPI {
 
             double kelvinTemp = currentWeather.getObject().getJSONObject("main").getDouble("temp");
 
-            previousTemperatureTimestamp = System.currentTimeMillis();
-            return previousTemperature = (int) Math.floor(kelvinToCelsius(kelvinTemp));
+            return (int) Math.floor(kelvinToCelsius(kelvinTemp));
+        } catch (UnirestException e) {
+            throw new UnableToGetWeatherException(e);
+        }
+    }
+
+    private JsonNode getWeatherForecast(String location) throws UnirestException {
+        return makeAuthenticatedRequest("forecast", Map.of("q", location));
+    }
+
+    @Override
+    public int getTemperatureAtTime(Date date) throws UnableToGetWeatherException {
+        try {
+            JsonNode forecast = getWeatherForecast(locationProvider.getCurrentLocation());
+
+            Date lastDateTime = null;
+            double lastTemperature = 0;
+
+            JSONArray array = forecast.getObject().getJSONArray("list");
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject obj = array.getJSONObject(i);
+                int datetime = obj.getInt("dt");
+
+                Date thisDateTime = new Date(datetime * 1000L);
+                double thisTemperature = obj.getDouble("temp");
+
+                if (date.compareTo(thisDateTime) < 0) {
+                    // The date given is before the time we have
+                    if (lastDateTime == null) {
+                        return getCurrentTemperature();
+                    } else {
+                        return 0;
+                    }
+                }
+
+                lastDateTime = thisDateTime;
+                lastTemperature = thisTemperature;
+            }
+
+            throw new UnableToGetWeatherException("Got section does not include this date!");
         } catch (UnirestException e) {
             throw new UnableToGetWeatherException(e);
         }
