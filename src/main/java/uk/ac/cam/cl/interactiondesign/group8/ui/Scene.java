@@ -1,17 +1,60 @@
 package uk.ac.cam.cl.interactiondesign.group8.ui;
 
+public enum EWeather {
+	NONE,
+	CLOUDY,
+	RAIN,
+	STORM,
+	SNOW,
+	FOG
+}
+
 public class Scene {
-	public ICharacter character;
-	public Temperature temperature;
-	public Tree tree;
-	public Weather weather;
-	public WindSock windSock;
+	private ICharacter character;
+	private Temperature temperature;
+	private Tree tree;
+	private Weather weather;
+	private WindSock windSock;
+
+	// Widget getters
+	public ICharacter getCharacter() { return character; }
+	public Temperature getTemperature() { return temperature; }
+	public Tree getTree() { return tree; }
+	public WindSock getWindSock() { return windSock; }
+
+	// Sets the dynamic weather widget
+	public void setWeather(EWeather weather) {
+		switch (weather)
+		{
+		case CLOUDY:
+			weather = new Cloud(this);
+			break;
+		case RAIN:
+			weather = new RainCloud(this);
+			break;
+		case STORM:
+			weather = new StormCloud(this);
+			break;
+		case SNOW:
+			weather = new SnowCloud(this);
+			break;
+		case FOG:
+			weather = new Fog(this);
+			break;
+		default:
+			weather = null;
+		}
+	}
+
+	public void postMessage(String message) {
+		character.displayMessage(message);
+	}
 
 	public Scene() {
 		// Initialise widgets
-		character = new Character();
-		temperature = new Temperature();
-		tree = new Tree();
-		windSock = new WindSock();
+		character = new Bonjo();
+		temperature = new Temperature(this);
+		tree = new Tree(this);
+		windSock = new WindSock(this);
 	}
 }
