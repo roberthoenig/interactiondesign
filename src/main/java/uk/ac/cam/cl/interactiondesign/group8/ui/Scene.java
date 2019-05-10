@@ -1,6 +1,9 @@
 package uk.ac.cam.cl.interactiondesign.group8.ui;
 
-public class Scene {
+import javax.swing.*;
+import java.awt.*;
+
+public class Scene extends JPanel {
 	private ICharacter character;
 	private Temperature temperature;
 	private Tree tree;
@@ -47,5 +50,8 @@ public class Scene {
 		temperature = new Temperature(this);
 		tree = new Tree(this);
 		windSock = new WindSock(this);
+
+		setLayout(new BorderLayout(0,0));
+		add(temperature, BorderLayout.PAGE_END);
 	}
 }

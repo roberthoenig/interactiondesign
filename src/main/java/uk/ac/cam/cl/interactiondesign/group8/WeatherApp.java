@@ -4,6 +4,7 @@ import uk.ac.cam.cl.interactiondesign.group8.api.*;
 import uk.ac.cam.cl.interactiondesign.group8.ui.*;
 
 import javax.swing.*;
+import java.awt.*;
 
 import java.util.Date;
 import java.util.Timer;
@@ -12,7 +13,7 @@ import java.util.TimerTask;
 public class WeatherApp extends JFrame {
 
 	// UI
-	private DateSlider dateSlider;
+	private DateBar dateBar;
 	private Scene scene;
 
 	// API
@@ -30,9 +31,18 @@ public class WeatherApp extends JFrame {
 	}
 
 	public WeatherApp() {
+		super("WeatherApp");
+
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(new Dimension(400, 300));
+
+		getContentPane().setLayout(new OverlayLayout(getContentPane()));
+
 		// Create UI elements
-		dateSlider = new DateSlider(this);
+		dateBar = new DateBar(this);
+		add(dateBar, BorderLayout.CENTER);
 		scene = new Scene();
+		add(scene, BorderLayout.CENTER);
 
 		// Initialise the API
 		locationProvider = new DummyLocationProvider();
@@ -43,7 +53,7 @@ public class WeatherApp extends JFrame {
 		timer.scheduleAtFixedRate(new TimerTask() {
 			@Override
 			public void run() {
-				dateSlider.updateTime();
+				dateBar.updateTime();
 			}
 		}, 0, 180000);
 	}

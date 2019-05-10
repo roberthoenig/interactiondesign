@@ -62,14 +62,22 @@ public class OpenWeatherMapAPI implements WeatherAPI {
                 int datetime = obj.getInt("dt");
 
                 Date thisDateTime = new Date(datetime * 1000L);
-                double thisTemperature = obj.getDouble("temp");
+                double thisTemperature = obj.getJSONObject("main").getDouble("temp");
 
-                if (date.compareTo(thisDateTime) < 0) {
+                if (date.before(thisDateTime)) {
                     // The date given is before the time we have
                     if (lastDateTime == null) {
                         return getCurrentTemperature();
-                    } else {
-                        return 0;
+                    }
+                    // Interpolate the two datapoints
+                    else {
+                        double kelvinTemp = interpolate(
+                            lastDateTime.toInstant().getEpochSecond(),
+                            lastTemperature,
+                            thisDateTime.toInstant().getEpochSecond(),
+                            thisTemperature,
+                            date.toInstant().getEpochSecond());
+                        return (int) Math.floor(kelvinToCelsius(kelvinTemp));
                     }
                 }
 
