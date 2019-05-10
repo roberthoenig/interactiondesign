@@ -1,5 +1,6 @@
 package uk.ac.cam.cl.interactiondesign.group8.ui;
 
+import uk.ac.cam.cl.interactiondesign.group8.utils.*;
 import java.util.Date;
 import javax.swing.*;
 import java.awt.*;
@@ -39,7 +40,7 @@ public class TimeCarousel extends JPanel {
 			setLayout(new BorderLayout(0,0));
 
 			try {
-				skyImage = ImageIO.read(new File("D:\\My Documents\\GitHub\\interactiondesign\\src\\main\\resources\\scenecomponents\\sky.png"));
+				skyImage = ImageIO.read(ResourceLoader.loadResource("scenecomponents/sky.png"));
 				skyLabel = new JLabel(new ImageIcon(skyImage));
 				add(skyLabel, BorderLayout.CENTER);
 			}
