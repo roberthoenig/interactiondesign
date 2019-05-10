@@ -6,6 +6,7 @@ import java.awt.*;
 public class Scene extends JPanel {
 	private ICharacter character;
 	private Temperature temperature;
+	private TimeCarousel timeCarousel;
 	private Tree tree;
 	private Weather weather;
 	private WindSock windSock;
@@ -13,6 +14,7 @@ public class Scene extends JPanel {
 	// Widget getters
 	public ICharacter getCharacter() { return character; }
 	public Temperature getTemperature() { return temperature; }
+	public TimeCarousel getTimeCarousel() { return timeCarousel; }
 	public Tree getTree() { return tree; }
 	public WindSock getWindSock() { return windSock; }
 
@@ -48,10 +50,12 @@ public class Scene extends JPanel {
 		// Initialise widgets
 		character = new Bonjo();
 		temperature = new Temperature(this);
+		timeCarousel = new TimeCarousel();
 		tree = new Tree(this);
 		windSock = new WindSock(this);
 
 		setLayout(new BorderLayout(0,0));
 		add(temperature, BorderLayout.PAGE_END);
+		add(timeCarousel, BorderLayout.CENTER);
 	}
 }

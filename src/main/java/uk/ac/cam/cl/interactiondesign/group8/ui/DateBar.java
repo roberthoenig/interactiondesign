@@ -66,7 +66,7 @@ public class DateBar extends JPanel {
 			// Fill slider
 			for (int i = 0; i <= numDays; ++i)
 			{
-				JLabel l = new JLabel(Integer.toString(i) + "             ");
+				JLabel l = new JLabel(Integer.toString(i) + "                                       ");
 				add(l);
 			}
 		}

@@ -5,6 +5,7 @@ import uk.ac.cam.cl.interactiondesign.group8.ui.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 import java.util.Date;
 import java.util.Timer;
@@ -24,6 +25,7 @@ public class WeatherApp extends JFrame {
 
 	public void setTime(Date time) {
 		try {
+			scene.getTimeCarousel().setTime(time);
 			// Get the weather from the API and update the UI
 			scene.getTemperature().setTemperature(weatherAPI.getTemperatureAtTime(time));
 		}
@@ -36,13 +38,22 @@ public class WeatherApp extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(new Dimension(400, 300));
 
-		getContentPane().setLayout(new OverlayLayout(getContentPane()));
+		JPanel contentPane = new JPanel(new BorderLayout(0,0));
+		JLayeredPane jlp = new JLayeredPane();
 
 		// Create UI elements
 		dateBar = new DateBar(this);
-		add(dateBar, BorderLayout.CENTER);
+		jlp.add(dateBar, JLayeredPane.PALETTE_LAYER);
 		scene = new Scene();
-		add(scene, BorderLayout.CENTER);
+		jlp.add(scene, JLayeredPane.DEFAULT_LAYER);
+		jlp.addComponentListener(new ComponentAdapter() {
+	        public void componentResized(ComponentEvent e) {
+	            dateBar.setBounds(0,0,e.getComponent().getWidth(),e.getComponent().getHeight());
+	            scene.setBounds(0,0,e.getComponent().getWidth(),e.getComponent().getHeight());
+	        }
+		});
+		contentPane.add(jlp, BorderLayout.CENTER);
+		setContentPane(contentPane);
 
 		// Initialise the API
 		locationProvider = new DummyLocationProvider();
