@@ -68,6 +68,13 @@ public class OpenWeatherMapAPI implements WeatherAPI {
                     // The date given is before the time we have
                     if (lastDateTime == null) {
                         return getCurrentTemperature();
+                    } else {
+                        return (int) Math.round(interpolate((double) lastDateTime.getTime(),
+                                lastTemperature,
+                                (double) thisDateTime.getTime(),
+                                thisTemperature,
+                                (double) date.getTime()
+                                ));
                     }
                     // Interpolate the two datapoints
                     else {
