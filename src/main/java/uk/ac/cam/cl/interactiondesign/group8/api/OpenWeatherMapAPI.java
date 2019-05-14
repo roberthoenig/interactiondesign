@@ -70,11 +70,11 @@ public class OpenWeatherMapAPI implements WeatherAPI {
                         return getCurrentTemperature();
                     } else {
                         double kelvinTemp = interpolate(
-                            lastDateTime.toInstant().getEpochSecond(),
-                            lastTemperature,
-                            thisDateTime.toInstant().getEpochSecond(),
-                            thisTemperature,
-                            date.toInstant().getEpochSecond());
+                                lastDateTime.toInstant().getEpochSecond(),
+                                lastTemperature,
+                                thisDateTime.toInstant().getEpochSecond(),
+                                thisTemperature,
+                                date.toInstant().getEpochSecond());
                         return (int) Math.round(kelvinToCelsius(kelvinTemp));
                     }
                 }

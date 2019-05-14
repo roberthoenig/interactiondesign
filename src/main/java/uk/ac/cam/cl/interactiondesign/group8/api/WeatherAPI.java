@@ -4,6 +4,7 @@ import java.util.Date;
 
 public interface WeatherAPI {
     int getCurrentTemperature() throws UnableToGetWeatherException;
+
     int getTemperatureAtTime(Date date) throws UnableToGetWeatherException;
 
     default double kelvinToCelsius(double input) {

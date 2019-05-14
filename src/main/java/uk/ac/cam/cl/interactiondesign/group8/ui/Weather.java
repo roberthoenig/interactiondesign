@@ -1,9 +1,9 @@
 package uk.ac.cam.cl.interactiondesign.group8.ui;
 
 public class Weather {
-	protected Scene scene;
+    protected Scene scene;
 
-	public Weather(Scene s) {
-		scene = s;
-	}
+    public Weather(Scene s) {
+        scene = s;
+    }
 }
