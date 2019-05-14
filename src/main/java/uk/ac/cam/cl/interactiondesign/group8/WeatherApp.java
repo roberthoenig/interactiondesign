@@ -2,6 +2,7 @@ package uk.ac.cam.cl.interactiondesign.group8;
 
 import uk.ac.cam.cl.interactiondesign.group8.api.*;
 import uk.ac.cam.cl.interactiondesign.group8.ui.*;
+import uk.ac.cam.cl.interactiondesign.group8.utils.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +11,7 @@ import java.awt.event.*;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.io.*;
 
 public class WeatherApp extends JFrame {
 
@@ -34,6 +36,15 @@ public class WeatherApp extends JFrame {
 
 	public WeatherApp() {
 		super("WeatherApp");
+
+		// Initialize localization
+		try {
+			Localization.importLocalizationData("localization/bonjo.json");
+		}
+		catch (IOException e) {
+			throw new RuntimeException("Failed to load localization data!");
+		}
+    	Localization.setLanguage("en_UK");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(new Dimension(400, 300));

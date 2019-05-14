@@ -5,5 +5,7 @@ public enum EClothing {
 	UMBRELLA,
 	COAT,
 	SKIS,
-	JUMPER
+	JUMPER,
+	LABCOAT,
+	NONE
 }

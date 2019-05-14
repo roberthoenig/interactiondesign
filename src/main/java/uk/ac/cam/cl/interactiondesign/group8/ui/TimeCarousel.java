@@ -37,7 +37,12 @@ public class TimeCarousel extends JPanel {
 			// Construct all swing elements
 			setLayout(new BorderLayout(0,0));
 
-			skyImage = ResourceLoader.loadImage("scenecomponents/sky.png");
+			try {
+				skyImage = ResourceLoader.loadImage("scenecomponents/sky.png");
+			}
+			catch (IOException e) {
+				throw new RuntimeException(e.getMessage());
+			}
 			skyLabel = new JLabel(new ImageIcon(skyImage));
 			add(skyLabel, BorderLayout.CENTER);
 		}

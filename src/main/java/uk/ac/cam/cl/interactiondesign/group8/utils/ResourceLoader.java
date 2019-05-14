@@ -7,7 +7,7 @@ import javax.imageio.*;
 
 public class ResourceLoader {
 	// Load a file from the resources folder
-    public static File loadResource(String filename) {
+    public static File loadResource(String filename) throws IOException {
         try {
             InputStream in = Main.class.getClassLoader().getResourceAsStream(filename);
 
@@ -23,17 +23,17 @@ public class ResourceLoader {
             return tempFile;
         } 
         catch (NullPointerException | IOException e) {
-            throw new RuntimeException("Failed to load resource: '" + filename + "'");
+            throw new IOException("Failed to load resource: '" + filename + "'");
         }
     }
 
     // As before but converts to a BufferedImage
-    public static BufferedImage loadImage(String filename) {
+    public static BufferedImage loadImage(String filename) throws IOException {
         try {
             return ImageIO.read(loadResource(filename));
         }
-        catch (IOException | RuntimeException e) {
-            throw new RuntimeException("Failed to load image: '" + filename + "'");
+        catch (IOException e) {
+            throw new IOException("Failed to load image: '" + filename + "'");
         }
     }
 }
