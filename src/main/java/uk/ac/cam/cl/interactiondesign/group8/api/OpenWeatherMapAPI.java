@@ -88,4 +88,8 @@ public class OpenWeatherMapAPI implements WeatherAPI {
             throw new UnableToGetWeatherException(e);
         }
     }
+
+    public void setLocationProvider(LocationProvider locationProvider) {
+        this.locationProvider = locationProvider;
+    }
 }
