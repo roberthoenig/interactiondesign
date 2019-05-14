@@ -35,7 +35,7 @@ public class WeatherApp extends JFrame {
 	}
 
 	public WeatherApp() {
-		super("WeatherApp");
+		super("Clever Weather");
 
 		// Initialize localization
 		try {
