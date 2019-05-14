@@ -17,10 +17,9 @@ public class TimeCarousel extends JPanel {
 
 		public void setHeight(int height)
 		{
-			Image scaledImage = skyImage.getScaledInstance(skyImage.getWidth(), height,
-	        		Image.SCALE_SMOOTH);
-
-			skyLabel.setIcon(new ImageIcon(scaledImage));
+			skyLabel.setIcon(
+				new ImageIcon(
+					ImageScaler.scaleImage(skyImage, skyImage.getWidth(), height)));
 		}
 
 		public void setPosition(float pos)
