@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.ThreadLocalRandom;
 import java.awt.event.*;
 
 public class Scene extends JPanel {
@@ -14,8 +15,6 @@ public class Scene extends JPanel {
 	private Weather weather;
 	private WindSock windSock;
 	private JButton settingsButton;
-	private ImageIcon settingsIcon;
-	private JDialog settingsDialog;
 
 	// Widget getters
 	public ICharacter getCharacter() { return character; }
@@ -52,25 +51,27 @@ public class Scene extends JPanel {
 		character.displayMessage(message);
 	}
 
-	public Scene(Frame frame) {
+	public Scene() {
 		// Initialise widgets
 		character = new Bonjo();
 		temperature = new Temperature(this);
 		timeCarousel = new TimeCarousel();
 		tree = new Tree(this);
 		windSock = new WindSock(this);
-		settingsIcon = new ImageIcon("src/main/resources/scenecomponents/settingsicon.png");
+		ImageIcon settingsIcon = new ImageIcon("src/main/resources/scenecomponents/settingsicon.png");
 		settingsButton = new JButton(settingsIcon);
 		settingsButton.setBorderPainted(false); 
         settingsButton.setContentAreaFilled(false); 
         settingsButton.setFocusPainted(false); 
 		settingsButton.setOpaque(false);
-		settingsDialog = new JDialog(frame, "I'm a dialog!");
+		JFrame frame = (JFrame) SwingUtilities.windowForComponent(this);
+		SettingsDialog settingsDialog = new SettingsDialog(frame, getSummand(), getSummand());
+		settingsDialog.pack();
 		settingsButton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Action!");
 				settingsDialog.setVisible(true);
+				settingsButton.setIcon(new ImageIcon("src/main/resources/scenecomponents/settingsicon_clicked.png"));
 			}
 		});
 
@@ -78,5 +79,9 @@ public class Scene extends JPanel {
 		add(temperature, BorderLayout.PAGE_END);
 		add(timeCarousel, BorderLayout.CENTER);
 		add(settingsButton, BorderLayout.WEST);
+	}
+
+	private int getSummand() {
+		return ThreadLocalRandom.current().nextInt(10, 100);
 	}
 }

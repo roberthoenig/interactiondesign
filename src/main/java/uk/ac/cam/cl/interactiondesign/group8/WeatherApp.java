@@ -44,7 +44,7 @@ public class WeatherApp extends JFrame {
 		// Create UI elements
 		dateBar = new DateBar(this);
 		jlp.add(dateBar, JLayeredPane.PALETTE_LAYER);
-		scene = new Scene(this);
+		scene = new Scene();
 		jlp.add(scene, JLayeredPane.DEFAULT_LAYER);
 		jlp.addComponentListener(new ComponentAdapter() {
 	        public void componentResized(ComponentEvent e) {
