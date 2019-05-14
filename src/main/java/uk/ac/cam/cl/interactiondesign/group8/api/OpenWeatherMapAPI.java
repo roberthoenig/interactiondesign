@@ -69,22 +69,13 @@ public class OpenWeatherMapAPI implements WeatherAPI {
                     if (lastDateTime == null) {
                         return getCurrentTemperature();
                     } else {
-                        return (int) Math.round(interpolate((double) lastDateTime.getTime(),
-                                lastTemperature,
-                                (double) thisDateTime.getTime(),
-                                thisTemperature,
-                                (double) date.getTime()
-                                ));
-                    }
-                    // Interpolate the two datapoints
-                    else {
                         double kelvinTemp = interpolate(
                             lastDateTime.toInstant().getEpochSecond(),
                             lastTemperature,
                             thisDateTime.toInstant().getEpochSecond(),
                             thisTemperature,
                             date.toInstant().getEpochSecond());
-                        return (int) Math.floor(kelvinToCelsius(kelvinTemp));
+                        return (int) Math.round(kelvinToCelsius(kelvinTemp));
                     }
                 }
 
@@ -92,7 +83,7 @@ public class OpenWeatherMapAPI implements WeatherAPI {
                 lastTemperature = thisTemperature;
             }
 
-            throw new UnableToGetWeatherException("Got section does not include this date!");
+            throw new UnableToGetWeatherException("OpenWeatherMap does not include this date in their forecast!");
         } catch (UnirestException e) {
             throw new UnableToGetWeatherException(e);
         }
