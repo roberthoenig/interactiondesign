@@ -11,6 +11,7 @@ public class Localization {
 	public static void importLocalizationData(String filename) throws IOException {
 		File dataFile = ResourceLoader.loadResource(filename);
 
+		// Read file to single string
 		BufferedReader br = new BufferedReader(new FileReader(dataFile));
 		StringBuilder sb = new StringBuilder();
 		String line;
@@ -20,9 +21,11 @@ public class Localization {
 			sb.append('\n');
 		}
 
+		// Parse JSON string
 		localizationData = new JSONObject(sb.toString());
 	}
 
+	// Set the language to be used
 	public static void setLanguage(String lang) {
 		language = lang;
 	}

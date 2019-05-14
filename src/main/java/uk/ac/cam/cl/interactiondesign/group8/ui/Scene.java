@@ -3,6 +3,8 @@ package uk.ac.cam.cl.interactiondesign.group8.ui;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
+import uk.ac.cam.cl.interactiondesign.group8.utils.*;
 
 public class Scene extends JPanel {
 	private Bonjo character;
@@ -52,22 +54,54 @@ public class Scene extends JPanel {
 	}
 
 	public Scene() {
-		// Initialise widgets
-		character = new Bonjo();
-		temperature = new Temperature(this);
-		timeCarousel = new TimeCarousel();
-		tree = new Tree(this);
-		windSock = new WindSock(this);
-
 		JLayeredPane jlp = new JLayeredPane();
-		jlp.add(character, JLayeredPane.PALETTE_LAYER);
-		jlp.add(temperature, JLayeredPane.PALETTE_LAYER);
+
+		// Background sky
+		timeCarousel = new TimeCarousel();
 		jlp.add(timeCarousel, JLayeredPane.DEFAULT_LAYER);
+
+		// Background land
+		JImage landBackground = new JImage();
+		try {
+			landBackground.setImage(ResourceLoader.loadImage("scenecomponents/background.png"));
+		}
+		catch (IOException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+		jlp.add(landBackground, new Integer(1));
+
+
+		// Widget layer
+		JPanel widgetPanel = new JPanel();
+		widgetPanel.setLayout(new GridBagLayout());
+		widgetPanel.setOpaque(false);
+		GridBagConstraints gc = new GridBagConstraints();
+
+		character = new Bonjo();
+		gc.gridx = 1;
+		gc.gridy = 2;
+		widgetPanel.add(character, gc);
+
+		temperature = new Temperature(this);
+		gc.gridx = 2;
+		gc.gridy = 1;
+		widgetPanel.add(temperature, gc);
+
+		tree = new Tree(this);
+
+		windSock = new WindSock(this);
+		gc.gridx = 2;
+		gc.gridy = 2;
+		widgetPanel.add(windSock, gc);
+
+		jlp.add(widgetPanel, JLayeredPane.PALETTE_LAYER);
+
+		// JLP resize policies (all fullscreen)
 		jlp.addComponentListener(new ComponentAdapter() {
 	        public void componentResized(ComponentEvent e) {
-	            character.setBounds(0,100,100,100);
-	            temperature.setBounds(100,100,100,100);
 	            timeCarousel.setBounds(0,0,e.getComponent().getWidth(),e.getComponent().getHeight());
+	            landBackground.setBounds(0,0,e.getComponent().getWidth(),e.getComponent().getHeight());
+	            widgetPanel.setBounds(0,0,e.getComponent().getWidth(),e.getComponent().getHeight());
 	        }
 		});
 
