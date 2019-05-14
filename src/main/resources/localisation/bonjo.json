@@ -1,0 +1,19 @@
+{
+	"en_UK":{
+		"weather":{
+			"THUNDERSTORM":["Lightning occurs when electricity in the clouds makes its way to the ground","We heard thunder after we see lightning since light travels faster than sound"],
+			"DRIZZLE":["At least it's not raining"],
+			"RAIN":["1","2"],
+			"SNOW":["No two snowflakes are alike","2"],
+			"FOG":["God's ripping a fat one rn #VN","Fog is when the clouds come down"],
+			"OVERCAST":["It might rain soon"],
+			"CLEAR":["This is pretty much a lack of weather. This makes Bonjo sad."],
+		},
+		"time":{
+			"SUNRISE":[],
+			"DAY":[],
+			"SUNSET":["Ahh, where is the sun going? Will it come back?"],
+			"NIGHT":[],
+		}
+	}
+}
