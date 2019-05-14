@@ -7,7 +7,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
 import java.io.*;
-import javax.imageio.*;
 
 public class TimeCarousel extends JPanel {
 	private class Slider extends JPanel {
@@ -39,13 +38,13 @@ public class TimeCarousel extends JPanel {
 			setLayout(new BorderLayout(0,0));
 
 			try {
-				skyImage = ImageIO.read(ResourceLoader.loadResource("scenecomponents/sky.png"));
-				skyLabel = new JLabel(new ImageIcon(skyImage));
-				add(skyLabel, BorderLayout.CENTER);
+				skyImage = ResourceLoader.loadImage("scenecomponents/sky.png");
 			}
 			catch (IOException e) {
-				System.err.println("Failed to load 'scenecomponents/sky.png'");
+				throw new RuntimeException(e.getMessage());
 			}
+			skyLabel = new JLabel(new ImageIcon(skyImage));
+			add(skyLabel, BorderLayout.CENTER);
 		}
 	}
 

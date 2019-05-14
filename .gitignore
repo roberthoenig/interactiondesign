@@ -134,3 +134,6 @@ gradle-app.setting
 **/build/
 
 # End of https://www.gitignore.io/api/java,gradle,intellij+all
+.gradle/4.10.3/fileHashes/*
+.gradle/4.10.3/taskHistory/*
+.gradle/buildOutputCleanup/*
