@@ -76,16 +76,16 @@ public class OpenWeatherMapAPI implements WeatherAPI {
                                 (double) date.getTime()
                                 ));
                     }
-                    // Interpolate the two datapoints
-                    else {
-                        double kelvinTemp = interpolate(
-                            lastDateTime.toInstant().getEpochSecond(),
-                            lastTemperature,
-                            thisDateTime.toInstant().getEpochSecond(),
-                            thisTemperature,
-                            date.toInstant().getEpochSecond());
-                        return (int) Math.floor(kelvinToCelsius(kelvinTemp));
-                    }
+                    // // Interpolate the two datapoints
+                    // else {
+                    //     double kelvinTemp = interpolate(
+                    //         lastDateTime.toInstant().getEpochSecond(),
+                    //         lastTemperature,
+                    //         thisDateTime.toInstant().getEpochSecond(),
+                    //         thisTemperature,
+                    //         date.toInstant().getEpochSecond());
+                    //     return (int) Math.floor(kelvinToCelsius(kelvinTemp));
+                    // }
                 }
 
                 lastDateTime = thisDateTime;

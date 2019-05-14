@@ -2,6 +2,9 @@ package uk.ac.cam.cl.interactiondesign.group8.ui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class Scene extends JPanel {
 	private ICharacter character;
@@ -10,6 +13,9 @@ public class Scene extends JPanel {
 	private Tree tree;
 	private Weather weather;
 	private WindSock windSock;
+	private JButton settingsButton;
+	private ImageIcon settingsIcon;
+	private JDialog settingsDialog;
 
 	// Widget getters
 	public ICharacter getCharacter() { return character; }
@@ -46,16 +52,31 @@ public class Scene extends JPanel {
 		character.displayMessage(message);
 	}
 
-	public Scene() {
+	public Scene(Frame frame) {
 		// Initialise widgets
 		character = new Bonjo();
 		temperature = new Temperature(this);
 		timeCarousel = new TimeCarousel();
 		tree = new Tree(this);
 		windSock = new WindSock(this);
+		settingsIcon = new ImageIcon("src/main/resources/scenecomponents/settingsicon.png");
+		settingsButton = new JButton(settingsIcon);
+		settingsButton.setBorderPainted(false); 
+        settingsButton.setContentAreaFilled(false); 
+        settingsButton.setFocusPainted(false); 
+		settingsButton.setOpaque(false);
+		settingsDialog = new JDialog(frame, "I'm a dialog!");
+		settingsButton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Action!");
+				settingsDialog.setVisible(true);
+			}
+		});
 
 		setLayout(new BorderLayout(0,0));
 		add(temperature, BorderLayout.PAGE_END);
 		add(timeCarousel, BorderLayout.CENTER);
+		add(settingsButton, BorderLayout.WEST);
 	}
 }
