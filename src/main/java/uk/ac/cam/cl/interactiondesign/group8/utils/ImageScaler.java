@@ -1,16 +1,20 @@
 package uk.ac.cam.cl.interactiondesign.group8.utils;
 
+import java.awt.*;
+import java.awt.image.*;
+
 public class ImageScaler {
 	// Scale an image stretching the entire thing
-    public static File scaleImage(BufferedImage in, int w, int h) {
-        Image scaledImage = skyImage.getScaledInstance(w, h,
-            Image.SCALE_SMOOTH);
+    public static Image scaleImage(BufferedImage in, int w, int h) {
+        return scaleImage(in, w, h, null);
     }
 
     // Scale an image stretching only the central rectangle
-    public static File scaleImage(BufferedImage in, int w, int h, Rectangle rect) {
-        Image scaledImage = skyImage.getScaledInstance(w, h,
-            Image.SCALE_SMOOTH);
+    public static Image scaleImage(BufferedImage in, int w, int h, Rectangle rect) {
+        if (rect == null) {
+            return in.getScaledInstance(w, h,
+                Image.SCALE_SMOOTH);
+        }
 
         BufferedImage out = new BufferedImage(w, h, in.getType());
         Graphics2D g2d = out.createGraphics();
@@ -58,5 +62,7 @@ public class ImageScaler {
             null);
 
         g2d.dispose();
+
+        return out;
     }
 }

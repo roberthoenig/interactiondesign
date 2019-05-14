@@ -2,9 +2,10 @@ package uk.ac.cam.cl.interactiondesign.group8.ui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 public class Scene extends JPanel {
-	private ICharacter character;
+	private Bonjo character;
 	private Temperature temperature;
 	private TimeCarousel timeCarousel;
 	private Tree tree;
@@ -22,14 +23,14 @@ public class Scene extends JPanel {
 	public void setWeather(EWeather w) {
 		switch (w)
 		{
-		case CLOUDY:
-			weather = new Cloud(this);
+		case THUNDERSTORM:
+			weather = new StormCloud(this);
+			break;
+		case DRIZZLE:
+			weather = new RainCloud(this);
 			break;
 		case RAIN:
 			weather = new RainCloud(this);
-			break;
-		case STORM:
-			weather = new StormCloud(this);
 			break;
 		case SNOW:
 			weather = new SnowCloud(this);
@@ -37,9 +38,13 @@ public class Scene extends JPanel {
 		case FOG:
 			weather = new Fog(this);
 			break;
+		case OVERCAST:
+			weather = new Cloud(this);
+			break;
+		case CLEAR:
 		default:
 			weather = null;
-		}
+		}	
 	}
 
 	public void postMessage(String message) {
@@ -54,8 +59,19 @@ public class Scene extends JPanel {
 		tree = new Tree(this);
 		windSock = new WindSock(this);
 
+		JLayeredPane jlp = new JLayeredPane();
+		jlp.add(character, JLayeredPane.PALETTE_LAYER);
+		jlp.add(temperature, JLayeredPane.PALETTE_LAYER);
+		jlp.add(timeCarousel, JLayeredPane.DEFAULT_LAYER);
+		jlp.addComponentListener(new ComponentAdapter() {
+	        public void componentResized(ComponentEvent e) {
+	            character.setBounds(0,100,100,100);
+	            temperature.setBounds(100,100,100,100);
+	            timeCarousel.setBounds(0,0,e.getComponent().getWidth(),e.getComponent().getHeight());
+	        }
+		});
+
 		setLayout(new BorderLayout(0,0));
-		add(temperature, BorderLayout.PAGE_END);
-		add(timeCarousel, BorderLayout.CENTER);
+		add(jlp, BorderLayout.CENTER);
 	}
 }

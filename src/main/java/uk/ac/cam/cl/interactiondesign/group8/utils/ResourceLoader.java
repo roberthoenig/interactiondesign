@@ -1,7 +1,9 @@
 package uk.ac.cam.cl.interactiondesign.group8.utils;
 
 import uk.ac.cam.cl.interactiondesign.group8.*;
+import java.awt.image.*;
 import java.io.*;
+import javax.imageio.*;
 
 public class ResourceLoader {
 	// Load a file from the resources folder
@@ -21,9 +23,17 @@ public class ResourceLoader {
             return tempFile;
         } 
         catch (NullPointerException | IOException e) {
-            System.err.println("Failed to load resource: '" + filename + "'");
+            throw new RuntimeException("Failed to load resource: '" + filename + "'");
         }
+    }
 
-        return null;
+    // As before but converts to a BufferedImage
+    public static BufferedImage loadImage(String filename) {
+        try {
+            return ImageIO.read(loadResource(filename));
+        }
+        catch (IOException | RuntimeException e) {
+            throw new RuntimeException("Failed to load image: '" + filename + "'");
+        }
     }
 }
