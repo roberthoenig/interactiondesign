@@ -121,25 +121,4 @@ public class Scene extends JPanel {
         setLayout(new BorderLayout(0, 0));
         add(jlp, BorderLayout.CENTER);
     }
-
-    // Sets the dynamic weather widget
-    public void setWeather(EWeather w) {
-        switch (w) {
-            case RAIN:
-                weather = new RainCloud(this);
-                break;
-            case SNOW:
-                weather = new SnowCloud(this);
-                break;
-            case FOG:
-                weather = new Fog(this);
-                break;
-            default:
-                weather = null;
-        }
-    }
-
-    public void postMessage(String message) {
-        character.displayMessage(message);
-    }
 }
