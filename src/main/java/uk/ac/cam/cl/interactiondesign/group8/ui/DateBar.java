@@ -26,6 +26,7 @@ public class DateBar extends JPanel {
 
         private JPanel bar;
         private JImage sliderImg;
+        private JPanel sliderContainer;
 
         public void setStartDate(Date s) {
             start = s;
@@ -44,7 +45,8 @@ public class DateBar extends JPanel {
 
             // Update slider position
             long deltaSec = current.toInstant().getEpochSecond() - start.toInstant().getEpochSecond();
-            sliderImg.setAlignmentX((float)deltaSec / (numDays * 86400));
+            long pos = deltaSec * (sliderContainer.getWidth() - sliderImg.getWidth()) / (numDays * 86400);
+            sliderImg.setBounds((int)pos, 0, 20, sliderContainer.getHeight());
             sliderImg.revalidate();
         }
 
@@ -76,12 +78,11 @@ public class DateBar extends JPanel {
             setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
             setOpaque(false);
             
-            JPanel sliderContainer = new JPanel();
+            sliderContainer = new JPanel();
             sliderContainer.setOpaque(false);
-            sliderContainer.setLayout(new BoxLayout(sliderContainer, BoxLayout.Y_AXIS));
+            sliderContainer.setLayout(null);
             sliderImg = new JImage();
             sliderImg.setMaximumSize(new Dimension(20, Integer.MAX_VALUE));
-            sliderImg.setAlignmentX(0.8f);
             try {
                 sliderImg.setImage(ResourceLoader.loadImage("scenecomponents/slider.png"));
             }
