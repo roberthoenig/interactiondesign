@@ -87,32 +87,32 @@ public class OpenWeatherMapAPITest {
         }
     }
 
-    @Test
+//    @Test
     public void testCurrentWeatherCambridge() {
         testCurrentWeather("Cambridge,UK");
     }
 
-    @Test
+//    @Test
     public void testCurrentWeatherEssex() {
         testCurrentWeather("Basildon,UK");
     }
 
-    @Test
+//    @Test
     public void testCurrentWeatherBristol() {
         testCurrentWeather("Bristol,UK");
     }
 
-    @Test
+//    @Test
     public void futureWeatherCambridge() {
         testFutureWeather("Cambridge,UK");
     }
 
-    @Test
+//    @Test
     public void futureWeatherEssex() {
         testFutureWeather("Basildon,UK");
     }
 
-    @Test
+//    @Test
     public void futureWeatherBristol() {
         testFutureWeather("Bristol,UK");
     }

@@ -20,7 +20,7 @@ public interface WeatherAPI {
             super(cause);
         }
 
-        public UnableToGetWeatherException(String message) {
+        UnableToGetWeatherException(String message) {
             super(message);
         }
     }
