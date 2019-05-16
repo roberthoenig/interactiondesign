@@ -5,9 +5,11 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 
+import uk.ac.cam.cl.interactiondesign.group8.Settings;
 import uk.ac.cam.cl.interactiondesign.group8.utils.*;
 
 public class Scene extends JPanel {
+	private Cog cog;
     private Bonjo character;
     private Temperature temperature;
     private TimeCarousel timeCarousel;
@@ -103,7 +105,40 @@ public class Scene extends JPanel {
         windSock = new WindSock(this);
         gc.gridx = 2;
         gc.gridy = 2;
-        widgetPanel.add(windSock, gc);
+		widgetPanel.add(windSock, gc);
+		
+		cog = new Cog(this);
+        gc.gridx = 1;
+		gc.gridy = 1;
+		JFrame frame = (JFrame) SwingUtilities.windowForComponent(this);
+		SettingsDialog settingsDialog = new SettingsDialog(frame, SettingsDialog.generateSummand(10, 99), SettingsDialog.generateSummand(10, 99));
+		settingsDialog.pack();
+		cog.addMouseListener(new MouseListener(){
+				@Override
+				public void mouseReleased(MouseEvent arg0) {
+					settingsDialog.setVisible(true);
+					try {
+						cog.setImage(ResourceLoader.loadImage("scenecomponents/settingsicon.png"));
+					} catch (Exception e) {
+						// lalala this cannot happen
+					}
+				}
+				@Override
+				public void mousePressed(MouseEvent arg0) {
+					try {
+						cog.setImage(ResourceLoader.loadImage("scenecomponents/settingsiconselected.png"));
+					} catch (Exception e) {
+						// really. it can't. get over it.
+					}
+				}
+				@Override
+				public void mouseExited(MouseEvent arg0) {}
+				@Override
+				public void mouseEntered(MouseEvent arg0) {}
+				@Override
+				public void mouseClicked(MouseEvent arg0) {}
+		});
+        widgetPanel.add(cog, gc);
 
         jlp.add(widgetPanel, JLayeredPane.PALETTE_LAYER);
 
