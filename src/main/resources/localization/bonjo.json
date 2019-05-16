@@ -14,7 +14,7 @@
 			"DAY":["Wow, what a wonderful day!","Bonjo was born on a hot summers day in the summer of the summer of '69"],
 			"SUNSET":["Ahh, where is the sun going? Will it come back?", "You know, if I were to die right now in some sort of fiery explosion due to the carelessness of a friend, well, that would just be okay."],
 			"NIGHT":["It's nearly Bonjo's bedtime, Bonjo is sleepy","Spotlight uh, Moonlight uh", "Zzzzzz.....Zzzzzzzzzz...Zzzz"],
-		}
+		},
 		"temperature":{
 			"HOT":["Bazinga! Bonjo wishes he was at the beach right now", "This is the perfect weather for ice cream!!!"],
 			"COLD":["Brrrr, B-BBonjo is f-ff-f-freezing","You're as cold as ice. You're willing to sacrifice our love. You never take advice. Someday you'll pay the price, I know"]
