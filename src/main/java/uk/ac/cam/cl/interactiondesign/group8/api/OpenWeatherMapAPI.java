@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class OpenWeatherMapAPI implements WeatherAPI {
     private static final String baseURL = "https://api.openweathermap.org/data/2.5/";
-    private static final String apiKey = "950f7dfa2f93b16e52fd6f2d01562ef9";
+    private static final String apiKey = "7e1c24937d661ef7edcf15d8059110b4";
 
     private LocationProvider locationProvider;
 
