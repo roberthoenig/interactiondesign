@@ -58,7 +58,7 @@ public class OpenWeatherMapAPI implements WeatherAPI {
 
     @Override
     public WeatherData getCurrentWeather() throws UnableToGetWeatherException {
-        if (lastCurrentWeatherTime - System.currentTimeMillis() < 1000L) {
+        if (System.currentTimeMillis() - lastCurrentWeatherTime < 1000L) {
             return lastCurrentWeather;
         } else {
             lastCurrentWeatherTime = System.currentTimeMillis();
@@ -67,7 +67,7 @@ public class OpenWeatherMapAPI implements WeatherAPI {
     }
 
     private JsonNode getWeatherForecast(String location) throws UnirestException {
-        if (lastFutureWeatherTime - System.currentTimeMillis() < 1000L) {
+        if (System.currentTimeMillis() - lastFutureWeatherTime < 1000L) {
             return lastFutureWeatherJSON;
         } else {
             lastFutureWeatherTime = System.currentTimeMillis();
