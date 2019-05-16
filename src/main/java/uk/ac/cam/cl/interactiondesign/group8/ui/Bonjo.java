@@ -13,16 +13,19 @@ public class Bonjo extends JPanel implements ICharacter {
     private JImage bonjoClothes;
     private JPanel messagePanel;
     private JLabel messageText;
+    private JImage messageImg;
 
     // Creates a speech bubble with the message
     public void displayMessage(String message) {
         messagePanel.setOpaque(true);
         messageText.setText(message);
+        messageImg.setVisible(true);
     }
 
     // Hides the message panel again
     public void hideMessage() {
         messagePanel.setOpaque(false);
+        messageImg.setVisible(false);
         messageText.setText("");
     }
 
@@ -40,9 +43,30 @@ public class Bonjo extends JPanel implements ICharacter {
 
         // Panel for Bonjo's messages
         messagePanel = new JPanel();
-        messagePanel.setLayout(new BorderLayout(0, 0));
+        messagePanel.setLayout(new OverlayLayout(messagePanel));
+        messagePanel.setOpaque(false);
+        messagePanel.setPreferredSize(new Dimension(250, 200));
+        messagePanel.setBackground(new Color(0,0,0,1));
+
+        BufferedImage messageImage;
+        try{
+            messageImage = ResourceLoader.loadImage("bonjocomponents/speechbubble.png");
+        } catch (IOException ioe){
+            throw new RuntimeException(ioe.getMessage());
+        }
+        messageImg = new JImage();
+        messageImg.setImage(messageImage);
+        messageImg.setAlignmentX(0.5f);
+        messageImg.setAlignmentY(0.5f);
+        messageImg.setMaximumSize(new Dimension(250, 200));
+
         messageText = new JLabel();
-        messagePanel.add(messageText, BorderLayout.CENTER);
+        messageText.setAlignmentX(0.8f);
+        messageText.setAlignmentY(0.5f);
+
+        messagePanel.add(messageText);
+        messagePanel.add(messageImg);
+
         // Hide panel onClick
         messagePanel.addMouseListener(new MouseAdapter() {
             @Override
@@ -51,6 +75,7 @@ public class Bonjo extends JPanel implements ICharacter {
             }
         });
         hideMessage(); // Default hidden
+
         add(messagePanel);
 
         // Panel containing Bonjo + Clothes
@@ -78,6 +103,15 @@ public class Bonjo extends JPanel implements ICharacter {
         }
         bonjoImg = new JImage();
         bonjoImg.setImage(img);
+
+        bonjoImg.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                displayMessage("Hello World!");
+            }
+        });
+
+
         jp.add(bonjoImg, BorderLayout.CENTER);
         bonjoPanel.add(jp);
 
