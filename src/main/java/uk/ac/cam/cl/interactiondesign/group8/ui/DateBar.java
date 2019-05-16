@@ -1,17 +1,21 @@
 package uk.ac.cam.cl.interactiondesign.group8.ui;
 
 import uk.ac.cam.cl.interactiondesign.group8.*;
+import uk.ac.cam.cl.interactiondesign.group8.utils.*;
+
+import java.io.*;
 
 import java.util.Date;
 import java.time.*;
 import java.util.function.*;
 import javax.swing.*;
+import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
 
 public class DateBar extends JPanel {
 
-    private class Slider extends JPanel {
+    private class Slider extends JLayeredPane {
         private int numDays = 4;
 
         Consumer<Date> callback;
@@ -19,6 +23,9 @@ public class DateBar extends JPanel {
         private Date start;
         private Date end;
         private Date current;
+
+        private JPanel bar;
+        private JImage sliderImg;
 
         public void setStartDate(Date s) {
             start = s;
@@ -36,33 +43,23 @@ public class DateBar extends JPanel {
             callback.accept(current);
 
             // Update slider position
-            JViewport viewPort = (JViewport) SwingUtilities.getAncestorOfClass(JViewport.class, this);
-            if (viewPort != null) {
-                Rectangle view = viewPort.getViewRect();
-                long deltaSec = current.toInstant().getEpochSecond() - start.toInstant().getEpochSecond();
-                long currentPos = (getWidth() * deltaSec) / (numDays * 86400);
-                view.x = Math.max(0, (int) currentPos - getWidth() / 2);
-                view.y = 0;
-
-                scrollRectToVisible(view);
-            }
+            long deltaSec = current.toInstant().getEpochSecond() - start.toInstant().getEpochSecond();
+            sliderImg.setAlignmentX((float)deltaSec / (numDays * 86400));
+            sliderImg.revalidate();
         }
 
         public void setNumDays(int i) {
             numDays = i;
             end = Date.from(start.toInstant().plusSeconds(numDays * 86400));
 
-            createUI();
+            createBar();
         }
 
-        private void createUI() {
-            // Construct all swing elements
-            setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-
+        private void createBar() {
             // Fill slider
             for (int i = 0; i <= numDays; ++i) {
                 JLabel l = new JLabel(Integer.toString(i) + "                                       ");
-                add(l);
+                bar.add(l);
             }
         }
 
@@ -74,7 +71,48 @@ public class DateBar extends JPanel {
             end = new Date();
             current = new Date();
 
-            createUI();
+            // Construct UI
+            setPreferredSize(new Dimension(Integer.MAX_VALUE, 40));
+            setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+            setOpaque(false);
+            
+            JPanel sliderContainer = new JPanel();
+            sliderContainer.setOpaque(false);
+            sliderContainer.setLayout(new BoxLayout(sliderContainer, BoxLayout.Y_AXIS));
+            sliderImg = new JImage();
+            sliderImg.setMaximumSize(new Dimension(20, Integer.MAX_VALUE));
+            sliderImg.setAlignmentX(0.8f);
+            try {
+                sliderImg.setImage(ResourceLoader.loadImage("scenecomponents/slider.png"));
+            }
+            catch (IOException e) {
+                throw new RuntimeException(e.getMessage());
+            }
+            sliderContainer.add(sliderImg);
+            add(sliderContainer);
+            
+
+            JPanel barBorder = new JPanel();
+            barBorder.setOpaque(false);
+            barBorder.setLayout(new BorderLayout(0,0));
+            barBorder.setBorder(new EmptyBorder(10, 20, 10, 20));
+
+            bar = new JPanel();
+            bar.setLayout(new BoxLayout(bar, BoxLayout.X_AXIS));
+            bar.setPreferredSize(new Dimension(999999, 20));
+            barBorder.add(bar, BorderLayout.CENTER);
+
+            add(barBorder);
+
+            addComponentListener(new ComponentAdapter() {
+                public void componentResized(ComponentEvent e) {
+                    barBorder.setBounds(0, 0, e.getComponent().getWidth(), e.getComponent().getHeight());
+                    sliderContainer.setBounds(0, 0, e.getComponent().getWidth(), e.getComponent().getHeight());
+                }
+            });
+
+
+            createBar();
 
             // Enable mouse drag
             Slider s = this;
@@ -95,7 +133,8 @@ public class DateBar extends JPanel {
                 public void mouseDragged(MouseEvent e) {
                     if (origin != null) {
                         // Calculate target time based on movement
-                        int delta = origin.x - e.getX();
+                        int delta = e.getX() - origin.x;
+                        origin = e.getPoint();
                         int deltaSecs = (delta * numDays * 86400) / getWidth();
                         Instant newTime = current.toInstant().plusSeconds(deltaSecs);
                         setCurrentDate(Date.from(newTime));
@@ -122,26 +161,18 @@ public class DateBar extends JPanel {
 
     public DateBar(WeatherApp wa) {
         app = wa;
-
         setOpaque(false);
-        setLayout(new BorderLayout(0, 0));
-
-        JPanel container = new JPanel();
-        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         slider = new Slider((Date d) -> {
             timeLabel.setText(d.toString());
             app.setTime(d);
         });
 
-        JScrollPane jsp = new JScrollPane(slider);
-        jsp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-        container.add(jsp);
+        add(slider);
 
         timeLabel = new JLabel("NULL");
-        container.add(timeLabel);
-
-        add(container, BorderLayout.PAGE_START);
+        add(timeLabel);
+        timeLabel.setAlignmentX(0.5f);
     }
 }
