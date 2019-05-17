@@ -1,25 +1,72 @@
 {
-	"en_UK":{
-		"weather":{
-			"THUNDERSTORM":["Lightning occurs when electricity in the clouds makes its way to the ground","We heard thunder after we see lightning since light travels faster than sound", "Remember to stay indoors during a thunder storm and, if you are outside, don't stand under a tree"],
-			"DRIZZLE":["At least it's not raining", "Weather like this reminds me of my childhood in the rainforest, oh how I miss those days *a tear rolls down bonjo's cheek*"],
-			"RAIN":["Rain is important since it gives us fresh water to drink","Make sure you remember your coats kids"],
-			"SNOW":["No two snowflakes are alike","Snow happens when rain freezes", "Wow, it's snowing! Why don't you make a snow angel","OwO what's this? *notices snowflakes*"],
-			"FOG":["God's ripping a fat one rn #VN","Fog is when the clouds come down","This is a bit spooky!"],
-			"OVERCAST":["It might rain soon","When water in the ocean gets hot, it turns into steam and becomes cloud"],
-			"CLEAR":["This is pretty much a lack of weather. This makes Bonjo sad.", "Wow, its looking pretty hot out there today kids, make sure that you wear sunscreen"],
+	"en_UK": {
+		"weather": {
+			"THUNDERSTORM": [
+				"Lightning occurs when electricity in the clouds makes its way to the ground",
+				"We heard thunder after we see lightning since light travels faster than sound",
+				"Remember to stay indoors during a thunder storm and, if you are outside, don't stand under a tree"
+			],
+			"DRIZZLE": [
+				"At least it's not raining",
+				"Weather like this reminds me of my childhood in the rainforest, oh how I miss those days *a tear rolls down bonjo's cheek*"
+			],
+			"RAIN": [
+				"Rain is important since it gives us fresh water to drink",
+				"Make sure you remember your coats kids"
+			],
+			"SNOW": [
+				"No two snowflakes are alike",
+				"Snow happens when rain freezes",
+				"Wow, it's snowing! Why don't you make a snow angel",
+				"OwO what's this? *notices snowflakes*"
+			],
+			"FOG": [
+				"God's ripping a fat one rn #VN",
+				"Fog is when the clouds come down",
+				"This is a bit spooky!"
+			],
+			"OVERCAST": [
+				"It might rain soon",
+				"When water in the ocean gets hot, it turns into steam and becomes cloud"
+			],
+			"CLEAR": [
+				"This is pretty much a lack of weather. This makes Bonjo sad.",
+				"Wow, its looking pretty hot out there today kids, make sure that you wear sunscreen"
+			]
 		},
-		"time":{
-			"SUNRISE":["Ahh, another day in the beautiful world of bonjo", "Whats that coming over the hill? Is it a sunrise? Is it a sunrise?"],
-			"DAY":["Wow, what a wonderful day!","Bonjo was born on a hot summers day in the summer of the summer of '69"],
-			"SUNSET":["Ahh, where is the sun going? Will it come back?", "You know, if I were to die right now in some sort of fiery explosion due to the carelessness of a friend, well, that would just be okay."],
-			"NIGHT":["It's nearly Bonjo's bedtime, Bonjo is sleepy","Spotlight uh, Moonlight uh", "Zzzzzz.....Zzzzzzzzzz...Zzzz"],
+		"time": {
+			"SUNRISE": [
+				"Ahh, another day in the beautiful world of bonjo",
+				"Whats that coming over the hill? Is it a sunrise? Is it a sunrise?"
+			],
+			"DAY": [
+				"Wow, what a wonderful day!",
+				"Bonjo was born on a hot summers day in the summer of the summer of '69"
+			],
+			"SUNSET": [
+				"Ahh, where is the sun going? Will it come back?",
+				"You know, if I were to die right now in some sort of fiery explosion due to the carelessness of a friend, well, that would just be okay."
+			],
+			"NIGHT": [
+				"It's nearly Bonjo's bedtime, Bonjo is sleepy",
+				"Spotlight uh, Moonlight uh",
+				"Zzzzzz.....Zzzzzzzzzz...Zzzz"
+			]
 		},
-		"temperature":{
-			"HOT":["Bazinga! Bonjo wishes he was at the beach right now", "This is the perfect weather for ice cream!!!"],
-			"COLD":["Brrrr, B-BBonjo is f-ff-f-freezing","You're as cold as ice. You're willing to sacrifice our love. You never take advice. Someday you'll pay the price, I know"],
-			"MILD":["Bonjo's got 99 problems but the weather ain't one", "You must construct additional pylons", "Bonjo loves Facts (Charlie Heat Version)"]
+		"temperature": {
+			"HOT": [
+				"Bazinga! Bonjo wishes he was at the beach right now",
+				"This is the perfect weather for ice cream!!!"
+			],
+			"COLD": [
+				"Brrrr, B-BBonjo is f-ff-f-freezing",
+				"You're as cold as ice. You're willing to sacrifice our love. You never take advice. Someday you'll pay the price, I know"
+			],
+			"MILD": [
+				"Bonjo's got 99 problems but the weather ain't one",
+				"You must construct additional pylons",
+				"Bonjo loves Facts (Charlie Heat Version)"
+			]
 		}
-
 	}
 }
