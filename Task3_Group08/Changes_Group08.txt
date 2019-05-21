@@ -2,3 +2,5 @@ Our app layout is implemented exactly as designed. Due to time constraints, we h
 In particular, the app is missing the following proposed features:
 - changing the location.
 - changing the unit for wind speed.
+- providing a childish feedback when clicking on items.
+- displaying a moving sun

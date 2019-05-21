@@ -29,6 +29,7 @@ public class DateBar extends JPanel implements Timeable {
         private JPanel bar;
         private JImage sliderImg;
         private JPanel sliderContainer;
+        private JScrollPane jsp;
 
         public void setStartDate(Date s) {
             start = s;
@@ -65,10 +66,44 @@ public class DateBar extends JPanel implements Timeable {
         }
 
         private void createBar() {
-            // Fill slider
-            for (int i = 0; i <= numDays; ++i) {
-                JLabel l = new JLabel(Integer.toString(i) + "                                       ");
-                bar.add(l);
+            JViewport viewPort = (JViewport) SwingUtilities.getAncestorOfClass(JViewport.class, bar);
+            if (viewPort != null) {
+                Rectangle view = viewPort.getViewRect();
+                
+                bar.removeAll();
+                // Fill slider
+                for (int i = 0; i <= numDays; ++i) {
+                    JLayeredPane jlp = new JLayeredPane();
+                    JImage background = new JImage();
+                    try {
+                        background.setImage(ResourceLoader.loadImage("scenecomponents/sliderbackground.png"));
+                    }
+                    catch (IOException e)
+                    {
+                        throw new RuntimeException(e.getMessage());
+                    }
+                    jlp.add(background, 0);
+                    JLabel label = new JLabel();
+                    label.setText(Integer.toString(i));
+                    jlp.add(label, Integer.valueOf(1));
+
+                    jlp.addComponentListener(new ComponentAdapter() {
+                        public void componentResized(ComponentEvent e) {
+                            background.setBounds(
+                                0, 0,
+                                e.getComponent().getWidth(), e.getComponent().getHeight());
+                            label.setBounds(
+                                10, 0,
+                                e.getComponent().getWidth() - 10, e.getComponent().getHeight() / 2);
+                        }
+                    });
+                    bar.add(jlp);
+                }
+
+                view.x = (int)((bar.getWidth() / (numDays + 1.0f)) * ((start.toInstant().getEpochSecond() % 86400) / 86400.0f));
+                view.y = 0;
+
+                bar.scrollRectToVisible(view);
             }
         }
 
@@ -107,8 +142,20 @@ public class DateBar extends JPanel implements Timeable {
 
             bar = new JPanel();
             bar.setLayout(new BoxLayout(bar, BoxLayout.X_AXIS));
-            bar.setPreferredSize(new Dimension(999999, 20));
-            barBorder.add(bar, BorderLayout.CENTER);
+
+            jsp = new JScrollPane(bar);
+            jsp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+            jsp.setPreferredSize(new Dimension(999999, 20));
+            jsp.addComponentListener(new ComponentAdapter() {
+                public void componentResized(ComponentEvent e) {
+                    bar.setMinimumSize(new Dimension((int)(jsp.getWidth() * (numDays + 1.0f) / (float)numDays), jsp.getHeight()));
+                    bar.setPreferredSize(new Dimension((int)(jsp.getWidth() * (numDays + 1.0f) / (float)numDays), jsp.getHeight()));
+                    bar.setMaximumSize(new Dimension((int)(jsp.getWidth() * (numDays + 1.0f) / (float)numDays), jsp.getHeight()));
+                }
+            });
+
+            barBorder.add(jsp, BorderLayout.CENTER);
 
             add(barBorder);
 
@@ -116,6 +163,7 @@ public class DateBar extends JPanel implements Timeable {
                 public void componentResized(ComponentEvent e) {
                     barBorder.setBounds(0, 0, e.getComponent().getWidth(), e.getComponent().getHeight());
                     sliderContainer.setBounds(0, 0, e.getComponent().getWidth(), e.getComponent().getHeight());
+
                 }
             });
 
