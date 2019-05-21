@@ -4,20 +4,36 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+
+import uk.ac.cam.cl.interactiondesign.group8.Settings;
 import uk.ac.cam.cl.interactiondesign.group8.utils.*;
 
-public class Temperature extends JPanel {
+public class Temperature extends JPanel implements Temperatureable {
 
     protected Scene scene;
 
     JLabel tempLabel;
 
+    int currentTemp;
+
     // Updates the temperature displayed on the sign/thermometer
     public void setTemperature(int temp) {
+        currentTemp = temp;
+        updateTemperature(Settings.temperature);
+    }
+
+    public void setTemperatureUnit(UnitConverter.Temp unit) {
         tempLabel.setText(
-            UnitConverter.tempToString(UnitConverter.Temp.C,
+            UnitConverter.tempToString(unit,
             UnitConverter.convertTemp(UnitConverter.Temp.K, UnitConverter.Temp.C,
-                temp)));
+                currentTemp)));
+    }
+
+    public void updateTemperature(Settings.Temperature temperature) {
+        switch(temperature) {
+            case CELSIUS: setTemperatureUnit(UnitConverter.Temp.C); break;
+            case FAHRENHEIT: setTemperatureUnit(UnitConverter.Temp.F); break; 
+        }
     }
 
     public Temperature(Scene s) {
@@ -74,5 +90,6 @@ public class Temperature extends JPanel {
         });
         thermometerPanel.setPreferredSize(new Dimension(30, 100));
         add(thermometerPanel);
+        Settings.temperatureables.add(this);
     }
 }
