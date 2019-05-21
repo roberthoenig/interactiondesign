@@ -61,7 +61,7 @@ public class Scene extends JPanel {
             default:
                 weather = null;
         }
-        weather = new Fog(this);
+
         if (weather != null) {
             widgetPanel.add(weather);
         }
