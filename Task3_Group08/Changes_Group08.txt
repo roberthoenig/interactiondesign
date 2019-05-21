@@ -1,0 +1,4 @@
+Our app layout is implemented exactly as designed. Due to time constraints, we have not implemented all proposed features.
+In particular, the app is missing the following proposed features:
+- changing the location.
+- changing the unit for wind speed.

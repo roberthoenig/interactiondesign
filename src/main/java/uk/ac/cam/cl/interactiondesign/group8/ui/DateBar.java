@@ -1,10 +1,12 @@
 package uk.ac.cam.cl.interactiondesign.group8.ui;
 
 import uk.ac.cam.cl.interactiondesign.group8.*;
+import uk.ac.cam.cl.interactiondesign.group8.Settings.Time;
 import uk.ac.cam.cl.interactiondesign.group8.utils.*;
 
 import java.io.*;
-
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.time.*;
 import java.util.function.*;
@@ -13,7 +15,7 @@ import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class DateBar extends JPanel {
+public class DateBar extends JPanel implements Timeable {
 
     private class Slider extends JLayeredPane {
         private int numDays = 4;
@@ -33,6 +35,10 @@ public class DateBar extends JPanel {
             end = Date.from(s.toInstant().plusSeconds(numDays * 86400));
 
             if (start.after(current)) setCurrentDate(start);
+        }
+
+        public Date getCurrentDate() {
+            return current;
         }
 
         public void setCurrentDate(Date c) {
@@ -160,20 +166,45 @@ public class DateBar extends JPanel {
         slider.setStartDate(new Date());
     }
 
+    public void setTime(Date d) {
+        switch(Settings.time) {
+            case TWELVE_HOURS: setFormatToTwelveHourClock(); break;
+            case TWENTYFOUR_HOURS: setFormatToTwentyFourHourClock(); break;
+        }
+        app.setTime(d);
+    }
+
+    public void updateTime(Time time) {
+        switch(time) {
+            case TWELVE_HOURS: setFormatToTwelveHourClock(); break;
+            case TWENTYFOUR_HOURS: setFormatToTwentyFourHourClock(); break;
+        }
+    }
+
+    public void setFormatToTwelveHourClock() {
+        DateFormat twelveHourDateFormat = new SimpleDateFormat("E hh:mm a");
+        timeLabel.setText(twelveHourDateFormat.format(slider.getCurrentDate()));
+    }
+
+    public void setFormatToTwentyFourHourClock() {
+        DateFormat twelveHourDateFormat = new SimpleDateFormat("E HH:mm");
+        timeLabel.setText(twelveHourDateFormat.format(slider.getCurrentDate()));
+    }
+
     public DateBar(WeatherApp wa) {
         app = wa;
         setOpaque(false);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        slider = new Slider((Date d) -> {
-            timeLabel.setText(d.toString());
-            app.setTime(d);
-        });
+        slider = new Slider(this::setTime);
 
         add(slider);
 
         timeLabel = new JLabel("NULL");
+        timeLabel.setOpaque(true);
+        timeLabel.setBackground(Color.WHITE);
         add(timeLabel);
         timeLabel.setAlignmentX(0.5f);
+        Settings.timeables.add(this);
     }
 }
