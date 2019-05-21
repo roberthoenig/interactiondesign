@@ -31,6 +31,7 @@ public class DateBar extends JPanel implements Timeable {
         private JPanel sliderContainer;
         private JScrollPane jsp;
 
+        // Set date corresponding to LHS of bar
         public void setStartDate(Date s) {
             start = s;
             end = Date.from(s.toInstant().plusSeconds(numDays * 86400));
@@ -58,6 +59,7 @@ public class DateBar extends JPanel implements Timeable {
             sliderImg.revalidate();
         }
 
+        // Number of days to be displayed on bar at once
         public void setNumDays(int i) {
             numDays = i;
             end = Date.from(start.toInstant().plusSeconds(numDays * 86400));
@@ -65,13 +67,15 @@ public class DateBar extends JPanel implements Timeable {
             createBar();
         }
 
+        // Redraw all UI
         private void createBar() {
             JViewport viewPort = (JViewport) SwingUtilities.getAncestorOfClass(JViewport.class, bar);
             if (viewPort != null) {
                 Rectangle view = viewPort.getViewRect();
                 
                 bar.removeAll();
-                // Fill slider
+
+                // Fill bar
                 for (int i = 0; i <= numDays; ++i) {
                     JLayeredPane jlp = new JLayeredPane();
                     JImage background = new JImage();
@@ -143,6 +147,7 @@ public class DateBar extends JPanel implements Timeable {
             bar = new JPanel();
             bar.setLayout(new BoxLayout(bar, BoxLayout.X_AXIS));
 
+            // Scroll pane to move date marks to current time
             jsp = new JScrollPane(bar);
             jsp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
             jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);

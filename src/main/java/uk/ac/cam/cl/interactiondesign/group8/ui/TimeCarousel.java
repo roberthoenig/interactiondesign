@@ -17,18 +17,22 @@ public class TimeCarousel extends JPanel {
         private BufferedImage skyImage;
         private JLabel skyLabel;
 
+        // Scales sky gradient to height of display
         public void setHeight(int height) {
             skyLabel.setIcon(
                     new ImageIcon(
                             ImageScaler.scaleImage(skyImage, (int)(skyImage.getWidth() * SCALE), height)));
         }
 
+        // Sets position of sky within day when pos is in the range [0, 1] [midnight, midnight]
         public void setPosition(float pos) {
             JViewport viewPort = (JViewport) SwingUtilities.getAncestorOfClass(JViewport.class, this);
             if (viewPort != null) {
                 Rectangle view = viewPort.getViewRect();
-                pos += 0.25;
+
+                pos += 0.25; // Offset by 6 hours to align with image
                 if (pos > 1.5f) pos -= 1.5f;
+                
                 view.x = (int) (pos / 1.5f * getWidth());
                 view.y = 0;
 
