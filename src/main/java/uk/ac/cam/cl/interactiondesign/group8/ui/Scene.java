@@ -101,9 +101,12 @@ public class Scene extends JPanel {
 		widgetPanel.add(windSock);
 		
 		cog = new Cog(this);
+
 		JFrame frame = (JFrame) SwingUtilities.windowForComponent(this);
+
 		SettingsDialog settingsDialog = new SettingsDialog(frame, SettingsDialog.generateSummand(10, 99), SettingsDialog.generateSummand(10, 99));
 		settingsDialog.pack();
+
 		cog.addMouseListener(new MouseListener(){
 				@Override
 				public void mouseReleased(MouseEvent arg0) {
