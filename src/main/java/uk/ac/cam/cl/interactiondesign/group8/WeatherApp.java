@@ -44,6 +44,8 @@ public class WeatherApp extends JFrame {
 
             temperatureState = apiData.getCurrentTemperatureState();
             weatherState = apiData.getCurrentWeather();
+
+            scene.getWindSock().setWindSpeed((float)apiData.getWindSpeed());
         } catch (WeatherAPI.UnableToGetWeatherException ignored) {}
     }
 

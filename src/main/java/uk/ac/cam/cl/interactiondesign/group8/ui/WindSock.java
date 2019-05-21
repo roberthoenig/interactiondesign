@@ -9,7 +9,7 @@ import java.awt.image.*;
 public class WindSock extends JImage {
     protected Scene scene;
 
-    private static final float[] WIND_THRESHOLDS = new float[]{1.6f, 5.5f, 10.8f};
+    private static final float[] WIND_THRESHOLDS = new float[]{3.0f, 4.0f, 5.0f};
     private BufferedImage[] windSockImages;
     private float windSpeed;
 
@@ -18,7 +18,7 @@ public class WindSock extends JImage {
 
         // Switch to corresponding image
         int img = 0;
-        while (wind > WIND_THRESHOLDS[img]) ++img;
+        while (img < WIND_THRESHOLDS.length && wind > WIND_THRESHOLDS[img]) ++img;
         setImage(windSockImages[img]);
     }
 
