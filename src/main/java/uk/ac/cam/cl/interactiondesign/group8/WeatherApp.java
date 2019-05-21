@@ -58,14 +58,6 @@ public class WeatherApp extends JFrame {
     public WeatherApp() {
         super("Clever Weather");
 
-        // Initialize localization
-        try {
-            Localization.importLocalizationData("localization/bonjo.json");
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to load localization data!");
-        }
-        Localization.setLanguage("en_GB");
-
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(new Dimension(400, 300));
 
@@ -106,6 +98,6 @@ public class WeatherApp extends JFrame {
             public void run() {
                 callGenerateMessage.run();
             }
-        }, 0, 6000);
+        }, 0, 15000);
     }
 }

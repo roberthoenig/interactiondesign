@@ -169,8 +169,8 @@ class SettingsMenu extends JDialog
     /** This method handles events for the text field. */
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
-            case celsius: Settings.temperature = Settings.Temperature.CELSIUS; break;
-            case fahrenheit: Settings.temperature = Settings.Temperature.FAHRENHEIT; break;
+            case celsius: Settings.setTemperature(Settings.Temperature.CELSIUS); break;
+            case fahrenheit: Settings.setTemperature(Settings.Temperature.FAHRENHEIT); break;
             case twelveHour: Settings.setTime(Settings.Time.TWELVE_HOURS); break;
             case twentyfourHour: Settings.setTime(Settings.Time.TWENTYFOUR_HOURS); break;
         }

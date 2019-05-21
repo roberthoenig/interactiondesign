@@ -1,9 +1,42 @@
 package uk.ac.cam.cl.interactiondesign.group8.ui;
 
-public abstract class Weather {
-    protected Scene scene;
+import uk.ac.cam.cl.interactiondesign.group8.utils.ResourceLoader;
 
-    public Weather(Scene s) {
+import java.awt.*;
+import java.io.IOException;
+
+public class Weather extends JImage {
+    protected Scene scene;
+    private String imagePath;
+
+    protected float xScale = 0.3f;
+    protected float yScale = 0.15f;
+
+    protected float xCorner = 0.2f;
+    protected float yCorner = 0.2f;
+
+    public Weather(Scene s, String imagePath) {
         scene = s;
+        try {
+            setImage(ResourceLoader.loadImage(imagePath));
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public float getxScale() {
+        return xScale;
+    }
+
+    public float getyScale() {
+        return yScale;
+    }
+
+    public float getxCorner() {
+        return xCorner;
+    }
+
+    public float getyCorner() {
+        return yCorner;
     }
 }
