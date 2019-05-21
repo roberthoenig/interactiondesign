@@ -30,6 +30,7 @@ public class WeatherApp extends JFrame {
             scene.getTimeCarousel().setTime(time);
             // Get the weather from the API and update the UI
             scene.getTemperature().setTemperature((int)weatherAPI.getWeatherAtTime(time).getCurrentTemperature());
+            scene.getWindSock().setWindSpeed((int)weatherAPI.getWeatherAtTime(time).getWindSpeed());
         } catch (WeatherAPI.UnableToGetWeatherException e) {
         }
     }

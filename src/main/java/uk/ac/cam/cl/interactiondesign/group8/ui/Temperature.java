@@ -14,7 +14,10 @@ public class Temperature extends JPanel {
 
     // Updates the temperature displayed on the sign/thermometer
     public void setTemperature(int temp) {
-        tempLabel.setText(Integer.toString(temp));
+        tempLabel.setText(
+            UnitConverter.tempToString(UnitConverter.Temp.C,
+            UnitConverter.convertTemp(UnitConverter.Temp.K, UnitConverter.Temp.C,
+                temp)));
     }
 
     public Temperature(Scene s) {
