@@ -30,6 +30,7 @@ public class Temperature extends JPanel {
         signPanel.setOpaque(false);
         tempLabel = new JLabel("--");
         tempLabel.setOpaque(false);
+
         signPanel.add(tempLabel, JLayeredPane.PALETTE_LAYER);
         JImage signImage = new JImage();
         try {
@@ -42,7 +43,9 @@ public class Temperature extends JPanel {
         signPanel.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
                 tempLabel.setBounds(0, 0, e.getComponent().getWidth(), e.getComponent().getHeight());
+
                 signImage.setBounds(0, 0, e.getComponent().getWidth(), e.getComponent().getHeight());
+                tempLabel.setLocation((signImage.getWidth()/3), -signImage.getHeight()/5);
             }
         });
         signPanel.setPreferredSize(new Dimension(100, 100));
