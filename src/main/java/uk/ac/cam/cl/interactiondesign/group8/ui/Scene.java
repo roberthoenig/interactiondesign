@@ -81,7 +81,7 @@ public class Scene extends JPanel {
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage());
         }
-        jlp.add(landBackground, new Integer(1));
+        jlp.add(landBackground, Integer.valueOf(1));
 
 
         // Widget layer

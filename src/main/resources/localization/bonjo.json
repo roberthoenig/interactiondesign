@@ -1,5 +1,5 @@
 {
-	"en_GB": {
+	"en_UK": {
 		"weather": {
 			"THUNDERSTORM": [
 				"Lightning occurs when electricity in the clouds makes its way to the ground",
@@ -12,26 +12,36 @@
 			],
 			"RAIN": [
 				"Rain is important since it gives us fresh water to drink",
-				"Make sure you remember your coats kids"
+				"Make sure you remember your coats kids",
+				"You can stand under my umbrella. You can stand under my umbrella, ella, ella, eh, eh, eh. Under my umbrella, ella, ella, eh, eh, eh. Under my umbrella, ella, ella, eh, eh, eh. Under my umbrella, ella, ella, eh, eh, eh, eh, eh, eh.",
+				"It rains, it pours, it rains, it pours. I came, I saw, I came, I saw. I praise the Lord, then break the law. I take what's mine, then take some more. It rains, it pours, it rains, it pours",
+				"On rainy days like this, Bonjo likes to listen to classic rain themed songs such as Toto's Africa",
+				"Maybe there will be a rainbow"
 			],
 			"SNOW": [
 				"No two snowflakes are alike",
 				"Snow happens when rain freezes",
 				"Wow, it's snowing! Why don't you make a snow angel",
-				"OwO what's this? *notices snowflakes*"
+				"OwO what's this? *notices snowflakes*",
+				"UwU *pwounces on swnow*"
 			],
 			"FOG": [
 				"God's ripping a fat one rn #VN",
 				"Fog is when the clouds come down",
-				"This is a bit spooky!"
+				"This is a bit spooky!",
+				"Crazy fact!: fog spelt backwards is gof"
 			],
 			"OVERCAST": [
 				"It might rain soon",
-				"When water in the ocean gets hot, it turns into steam and becomes cloud"
+				"When water in the ocean gets hot, it turns into steam and becomes cloud",
+				"There are many types of cloud including Cumulonimbus, altocumulus, altostratus, stratus, cumulus, stratocumulus",
+				"Bonjo thinks that clouds are pretty sicko mode",
+				"Man, Bonjo really wishes he was playing some fourtnite right now since the weather isn't that great *does the floss dance from fourtnite*"
 			],
 			"CLEAR": [
 				"This is pretty much a lack of weather. This makes Bonjo sad.",
-				"Wow, its looking pretty hot out there today kids, make sure that you wear sunscreen"
+				"Wow, its looking pretty hot out there today kids, make sure that you wear sunscreen",
+				"Clear skies"
 			]
 		},
 		"time": {
@@ -41,7 +51,8 @@
 			],
 			"DAY": [
 				"Wow, what a wonderful day!",
-				"Bonjo was born on a hot summers day in the summer of the summer of '69"
+				"Bonjo was born on a hot summers day in the summer of the summer of '69",
+				"Weather GONE WRONG in the hood edition!!!"
 			],
 			"SUNSET": [
 				"Ahh, where is the sun going? Will it come back?",
@@ -50,22 +61,26 @@
 			"NIGHT": [
 				"It's nearly Bonjo's bedtime, Bonjo is sleepy",
 				"Spotlight uh, Moonlight uh",
-				"Zzzzzz.....Zzzzzzzzzz...Zzzz"
+				"Zzzzzz.....Zzzzzzzzzz...Zzzz",
+				"Ayy, y'all heard about the good news? Y'all sleeping on me, huh? Had a good snooze?"
 			]
 		},
 		"temperature": {
 			"HOT": [
 				"Bazinga! Bonjo wishes he was at the beach right now",
-				"This is the perfect weather for ice cream!!!"
+				"This is the perfect weather for ice cream!!!",
+				"Make sure that you stay hydrated in this hot weather by drinking lots of water"
 			],
 			"COLD": [
 				"Brrrr, B-BBonjo is f-ff-f-freezing",
-				"You're as cold as ice. You're willing to sacrifice our love. You never take advice. Someday you'll pay the price, I know"
+				"You're as cold as ice. You're willing to sacrifice our love. You never take advice. Someday you'll pay the price, I know",
+				"Ice, ice baby"
 			],
 			"MILD": [
 				"Bonjo's got 99 problems but the weather ain't one",
 				"You must construct additional pylons",
-				"Bonjo loves Facts (Charlie Heat Version)"
+				"Bonjo loves Facts (Charlie Heat Version)",
+				"Cause you're hot then you're cold. You're 'Yes' then you're 'No'. You're in then you're out. You're up then you're down"
 			]
 		}
 	}

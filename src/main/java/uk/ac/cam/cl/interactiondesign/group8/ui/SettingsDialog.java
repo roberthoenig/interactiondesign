@@ -111,8 +111,7 @@ class SettingsDialog extends JDialog
                  * we're going to change the JOptionPane's
                  * value property.
                  */
-                    optionPane.setValue(new Integer(
-                                        JOptionPane.CLOSED_OPTION));
+                    optionPane.setValue(JOptionPane.CLOSED_OPTION);
             }
         });
  
