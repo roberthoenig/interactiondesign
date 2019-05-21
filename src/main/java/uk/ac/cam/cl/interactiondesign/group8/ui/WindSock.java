@@ -34,6 +34,5 @@ public class WindSock extends JImage {
         }
 
         setImage(windSockImages[0]);
-        setPreferredSize(new Dimension(100, 100));
     }
 }

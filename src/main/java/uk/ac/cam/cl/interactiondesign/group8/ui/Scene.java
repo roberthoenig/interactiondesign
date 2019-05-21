@@ -77,7 +77,7 @@ public class Scene extends JPanel {
         // Background land
         JImage landBackground = new JImage();
         try {
-            landBackground.setImage(ResourceLoader.loadImage("scenecomponents/background.png"));
+            landBackground.setImage(ResourceLoader.loadImage("scenecomponents/backgroundbonzi.png"));
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage());
         }
@@ -86,30 +86,21 @@ public class Scene extends JPanel {
 
         // Widget layer
         JPanel widgetPanel = new JPanel();
-        widgetPanel.setLayout(new GridBagLayout());
+        widgetPanel.setLayout(null);
         widgetPanel.setOpaque(false);
-        GridBagConstraints gc = new GridBagConstraints();
 
         character = new Bonjo();
-        gc.gridx = 1;
-        gc.gridy = 2;
-        widgetPanel.add(character, gc);
+        widgetPanel.add(character);
 
         temperature = new Temperature(this);
-        gc.gridx = 2;
-        gc.gridy = 1;
-        widgetPanel.add(temperature, gc);
+        widgetPanel.add(temperature);
 
         tree = new Tree(this);
 
         windSock = new WindSock(this);
-        gc.gridx = 2;
-        gc.gridy = 2;
-		widgetPanel.add(windSock, gc);
+		widgetPanel.add(windSock);
 		
 		cog = new Cog(this);
-        gc.gridx = 1;
-		gc.gridy = 1;
 		JFrame frame = (JFrame) SwingUtilities.windowForComponent(this);
 		SettingsDialog settingsDialog = new SettingsDialog(frame, SettingsDialog.generateSummand(10, 99), SettingsDialog.generateSummand(10, 99));
 		settingsDialog.pack();
@@ -138,7 +129,21 @@ public class Scene extends JPanel {
 				@Override
 				public void mouseClicked(MouseEvent arg0) {}
 		});
-        widgetPanel.add(cog, gc);
+        widgetPanel.add(cog);
+
+        widgetPanel.addComponentListener(new ComponentAdapter() {
+            public void componentResized(ComponentEvent e) {
+                character.setBounds(
+                	(int)(0.384f * e.getComponent().getWidth()), (int)(0.588f * e.getComponent().getHeight()),
+					(int)(0.708f * e.getComponent().getWidth()), (int)(0.960f * e.getComponent().getHeight()));
+                temperature.setBounds(
+                	(int)(0.725f * e.getComponent().getWidth()), (int)(0.593f * e.getComponent().getHeight()),
+					(int)(0.250f * e.getComponent().getWidth()), (int)(0.310f * e.getComponent().getHeight()));
+                windSock.setBounds(
+                	(int)(0.765f * e.getComponent().getWidth()), (int)(0.257f * e.getComponent().getHeight()),
+					(int)(0.128f * e.getComponent().getWidth()), (int)(0.294f * e.getComponent().getHeight()));
+            }
+        });
 
         jlp.add(widgetPanel, JLayeredPane.PALETTE_LAYER);
 
