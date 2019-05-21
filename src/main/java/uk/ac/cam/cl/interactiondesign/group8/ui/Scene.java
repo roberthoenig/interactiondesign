@@ -156,6 +156,9 @@ public class Scene extends JPanel {
                         (int)(0.765f * e.getComponent().getWidth()), (int)(0.257f * e.getComponent().getHeight()),
                         (int)(0.128f * e.getComponent().getWidth()), (int)(0.294f * e.getComponent().getHeight()));
 
+                cog.setBounds(
+                        (int)(0.05f * e.getComponent().getWidth()), (int)(0.8f * e.getComponent().getHeight()),
+                        (int)(0.08f * e.getComponent().getWidth()), (int)(0.08f * e.getComponent().getWidth()));
             }
         });
 
