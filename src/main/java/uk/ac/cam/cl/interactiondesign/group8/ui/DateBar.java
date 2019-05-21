@@ -33,6 +33,7 @@ public class DateBar extends JPanel implements Timeable {
         public void setStartDate(Date s) {
             start = s;
             end = Date.from(s.toInstant().plusSeconds(numDays * 86400));
+            createBar();
 
             if (start.after(current)) setCurrentDate(start);
         }
