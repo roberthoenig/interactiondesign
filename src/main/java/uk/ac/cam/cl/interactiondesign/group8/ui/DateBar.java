@@ -85,7 +85,7 @@ public class DateBar extends JPanel implements Timeable {
                     jlp.add(background, 0);
                     JLabel label = new JLabel();
                     label.setText(Integer.toString(i));
-                    jlp.add(label, 1);
+                    jlp.add(label, Integer.valueOf(1));
 
                     jlp.addComponentListener(new ComponentAdapter() {
                         public void componentResized(ComponentEvent e) {
@@ -100,7 +100,7 @@ public class DateBar extends JPanel implements Timeable {
                     bar.add(jlp);
                 }
 
-                view.x = (int)((bar.getWidth() / (numDays + 1.0f)) * ((current.toInstant().getEpochSecond() % 86400) / 86400.0f));
+                view.x = (int)((bar.getWidth() / (numDays + 1.0f)) * ((start.toInstant().getEpochSecond() % 86400) / 86400.0f));
                 view.y = 0;
 
                 bar.scrollRectToVisible(view);
