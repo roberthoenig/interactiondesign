@@ -35,6 +35,7 @@ public class ChatSelector {
 
         double choice = random.nextDouble() * totalProbability;
         IChatInterface decision = null;
+        // Pick one based on this chance
         for (IChatInterface option : options) {
             choice -= option.getProbability();
             if (choice <= 0) {

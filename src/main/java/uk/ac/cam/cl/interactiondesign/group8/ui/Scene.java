@@ -16,7 +16,8 @@ public class Scene extends JPanel {
     private Tree tree;
     private Weather weather;
     private WindSock windSock;
-    JPanel widgetPanel;
+    private JPanel widgetPanel;
+
     // Widget getters
     public Bonjo getCharacter() {
         return character;

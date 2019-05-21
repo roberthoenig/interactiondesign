@@ -9,7 +9,9 @@ public class DummyLocationProvider implements LocationProvider {
     }
 
     public DummyLocationProvider() {
-        location = "Alaska,VE";
+        // This class initialises a fixed location for devices
+        // that do not have a location sensor.
+        location = "Cambridge,UK";
     }
 
     public DummyLocationProvider(String location) {

@@ -11,6 +11,7 @@ public interface WeatherAPI {
 
     WeatherData getWeatherAtTime(Date date) throws UnableToGetWeatherException;
 
+    // Linearly interpolate two double points at a third x
     default double interpolate(double x1, double y1, double x2, double y2, double x3) {
         return (x3 - x1) * (y2 - y1) / (x2 - x1) + y1;
     }
@@ -26,6 +27,7 @@ public interface WeatherAPI {
     }
 
     class WeatherData {
+        // This is the immutable results class
         private final double currentTemperature;        // current temperature in kelvin
         private final EWeather[] currentWeather;        // current weather as an array of conditions
         private final double windSpeed;                 // current wind speed in m/s
