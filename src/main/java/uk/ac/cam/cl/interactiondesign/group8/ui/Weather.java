@@ -5,6 +5,8 @@ import uk.ac.cam.cl.interactiondesign.group8.utils.ResourceLoader;
 import java.awt.*;
 import java.io.IOException;
 
+/* Superclass for weather items, i.e. clouds, rain, etc.
+Provides a sprite and scaling information.*/
 public class Weather extends JImage {
     protected Scene scene;
     private String imagePath;

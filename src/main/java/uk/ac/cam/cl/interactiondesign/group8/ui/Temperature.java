@@ -55,9 +55,10 @@ public class Temperature extends JPanel implements Temperatureable {
             throw new RuntimeException(e.getMessage());
         }
         signPanel.add(signImage, JLayeredPane.DEFAULT_LAYER);
+
+        // Code to manage window resizing for the sign and font size
         signPanel.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
-                //tempLabel.setBounds(0, 0, e.getComponent().getWidth(), e.getComponent().getHeight())
                 tempLabel.setBounds(
                         (int)(0.3f * e.getComponent().getWidth()), (int)(0.15f * e.getComponent().getHeight()),
                         (int)(0.6f * e.getComponent().getWidth()), (int)(0.3f * e.getComponent().getHeight()));

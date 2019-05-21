@@ -25,6 +25,7 @@ public class WindSock extends JImage {
     public WindSock(Scene s) {
         scene = s;
 
+        // Load all images
         try {
             windSockImages = new BufferedImage[WIND_THRESHOLDS.length + 1];
             for (int i = 0; i <= WIND_THRESHOLDS.length; ++i)
