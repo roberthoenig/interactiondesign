@@ -171,8 +171,8 @@ class SettingsMenu extends JDialog
         switch (e.getActionCommand()) {
             case celsius: Settings.temperature = Settings.Temperature.CELSIUS; break;
             case fahrenheit: Settings.temperature = Settings.Temperature.FAHRENHEIT; break;
-            case twelveHour: Settings.time = Settings.Time.TWELVE_HOURS; break;
-            case twentyfourHour: Settings.time = Settings.Time.TWENTYFOUR_HOURS; break;
+            case twelveHour: Settings.setTime(Settings.Time.TWELVE_HOURS); break;
+            case twentyfourHour: Settings.setTime(Settings.Time.TWENTYFOUR_HOURS); break;
         }
         System.out.println(Settings.time);
         System.out.println(Settings.temperature);
