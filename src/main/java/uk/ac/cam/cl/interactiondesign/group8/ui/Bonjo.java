@@ -15,7 +15,7 @@ public class Bonjo extends JPanel implements ICharacter {
     private JImage bonjoImg;
 
     //private JLayeredPane messagePanel;
-    private JPanel messagePanel;
+    private JLayeredPane messagePanel;
     private JLabel messageText;
     private JImage messageImg;
     private JLayeredPane bonjoPanel;
@@ -72,15 +72,15 @@ public class Bonjo extends JPanel implements ICharacter {
         messageText.setFont(new Font(messageText.getFont().getName(), Font.PLAIN, height/30));
     }
     public Bonjo() {
-        setLayout(new FlowLayout(FlowLayout.LEFT, 5, 0));
+        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         setOpaque(false);
 
         // Set up the chat ability
         chatSelector = new ChatSelector("localization/bonjo.json", ChatSelector.LanguageCode.en_GB);
 
         // Panel for Bonjo's messages
-        messagePanel = new JPanel();
-        messagePanel.setLayout(new OverlayLayout(messagePanel));
+        messagePanel = new JLayeredPane();
+        //messagePanel.setLayout(new OverlayLayout(messagePanel));
         messagePanel.setOpaque(false);
         messagePanel.setPreferredSize(new Dimension(250, 200));
         messagePanel.setBackground(new Color(0,0,0,1));
@@ -93,105 +93,16 @@ public class Bonjo extends JPanel implements ICharacter {
         }
         messageImg = new JImage();
         messageImg.setImage(messageImage);
-        messageImg.setAlignmentX(0.5f);
-        messageImg.setAlignmentY(0.5f);
-        messageImg.setMaximumSize(new Dimension(250, 200));
-
-        messageText = new JLabel();
-        messageText.setAlignmentX(0.8f);
-        messageText.setAlignmentY(0.5f);
-
-        messagePanel.add(messageText);
-        messagePanel.add(messageImg);
-
-        // Hide panel onClick
-        messagePanel.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                hideMessage();
-            }
-        });
-        hideMessage(); // Default hidden
-
-        add(messagePanel);
-
-        // Panel containing Bonjo + Clothes
-        JPanel bonjoPanel = new JPanel();
-        bonjoPanel.setLayout(new OverlayLayout(bonjoPanel));
-        bonjoPanel.setOpaque(false);
-        bonjoPanel.setPreferredSize(new Dimension(100, 100));
-
-        JPanel jp = new JPanel();
-        jp.setLayout(new BorderLayout(0, 0));
-        jp.setOpaque(false);
-
-        //bonjoClothes = new JImage();
-        //bonjoClothes.setVisible(false);
-        //jp.add(bonjoClothes, BorderLayout.CENTER);
-        bonjoPanel.add(jp);
-
-        jp = new JPanel();
-        jp.setLayout(new BorderLayout(0, 0));
-        jp.setOpaque(false);
-        BufferedImage img;
-        try {
-            img = ResourceLoader.loadImage("bonjocomponents/bonjodefault.png");
-        } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
-        }
-        bonjoImg = new JImage();
-        bonjoImg.setImage(img);
-
-        bonjoImg.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                displayMessage("Hello World!");
-            }
-        });
-
-
-        jp.add(bonjoImg, BorderLayout.CENTER);
-        bonjoPanel.add(jp);
-
-        add(bonjoPanel);
-
-        // Testing only
-//        displayMessage("Hello World!");
-    }
-    /*
-    public Bonjo() {
-
-        setLayout(new FlowLayout(FlowLayout.LEFT, 5, 0));
-        setOpaque(false);
-
-        // Set up the chat ability
-        chatSelector = new ChatSelector("localization/bonjo.json", ChatSelector.LanguageCode.en_GB);
-
-        // Panel for Bonjo's messages
-        messagePanel = new JLayeredPane();
-        //messagePanel.setLayout(new OverlayLayout(messagePanel));
-        messagePanel.setOpaque(false);
-        messagePanel.setPreferredSize(new Dimension(250, 200));
-        //messagePanel.setBackground(new Color(0,0,0,1));
-
-        BufferedImage messageImage;
-        try{
-            messageImage = ResourceLoader.loadImage("bonjocomponents/speechbubble.png");
-        } catch (IOException ioe){
-            throw new RuntimeException(ioe.getMessage());
-        }
-        messageImg = new JImage();
-        messageImg.setImage(messageImage);
         //messageImg.setAlignmentX(0.5f);
         //messageImg.setAlignmentY(0.5f);
-        messageImg.setMaximumSize(new Dimension(250, 200));
+        //messageImg.setMaximumSize(new Dimension(250, 200));
 
         messageText = new JLabel();
         //messageText.setAlignmentX(0.8f);
         //messageText.setAlignmentY(0.5f);
-        messagePanel.add(messageImg, JLayeredPane.DEFAULT_LAYER);
+
         messagePanel.add(messageText, JLayeredPane.PALETTE_LAYER);
-        //messagePanel.setPreferredSize(new Dimension(100, 100));
+        messagePanel.add(messageImg, JLayeredPane.DEFAULT_LAYER);
 
         // Hide panel onClick
         messagePanel.addMouseListener(new MouseAdapter() {
@@ -200,34 +111,33 @@ public class Bonjo extends JPanel implements ICharacter {
                 hideMessage();
             }
         });
-        hideMessage(); // Default hidden
 
         messagePanel.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
-                System.out.println("HIII");
+                messageImg.setBounds(
+                        (int)(0f * e.getComponent().getWidth()), (int)(0.15f * e.getComponent().getHeight()),
+                        (int)(0.9f * e.getComponent().getWidth()), (int)(0.6f * e.getComponent().getHeight()));
+                messageText.setBounds(
+                        (int)(0.1f * e.getComponent().getWidth()), (int)(0.15f * e.getComponent().getHeight()),
+                        (int)(0.6f * e.getComponent().getWidth()), (int)(0.5f * e.getComponent().getHeight()));
+                messageText.setFont(new Font(messageText.getFont().getName(), Font.BOLD, (int)(0.05f*e.getComponent().getHeight())));
 
             }
         });
+        hideMessage(); // Default hidden
 
         add(messagePanel);
 
         // Panel containing Bonjo + Clothes
-        JPanel bonjoPanel = new JPanel();
-        bonjoPanel.setLayout(new OverlayLayout(bonjoPanel));
+        JLayeredPane bonjoPanel = new JLayeredPane();
+        //bonjoPanel.setLayout(new OverlayLayout(bonjoPanel));
         bonjoPanel.setOpaque(false);
-        bonjoPanel.setPreferredSize(new Dimension(100, 100));
+        //bonjoPanel.setPreferredSize(new Dimension(100, 100));
 
-        JPanel jp = new JPanel();
-        jp.setLayout(new BorderLayout(0, 0));
-        jp.setOpaque(false);
 
-        bonjoClothes = new JImage();
-        bonjoClothes.setVisible(false);
-        jp.add(bonjoClothes, BorderLayout.CENTER);
-        bonjoPanel.add(jp);
-        JPanel jp = new JPanel();
-        jp.setLayout(new BorderLayout(0, 0));
-        jp.setOpaque(false);
+        //jp = new JPanel();
+        //jp.setLayout(new BorderLayout(0, 0));
+        //jp.setOpaque(false);
         BufferedImage img;
         try {
             img = ResourceLoader.loadImage("bonjocomponents/bonjodefault.png");
@@ -236,20 +146,28 @@ public class Bonjo extends JPanel implements ICharacter {
         }
         bonjoImg = new JImage();
         bonjoImg.setImage(img);
+
         bonjoImg.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+
                 displayMessage("Hello World!");
             }
         });
+        bonjoImg.setPreferredSize(new Dimension(250, 200));
 
-
-        jp.add(bonjoImg, BorderLayout.CENTER);
-        bonjoPanel.add(jp);
+        bonjoPanel.add(bonjoImg, BorderLayout.CENTER);
+        //bonjoPanel.add(jp);
+        bonjoPanel.setPreferredSize(new Dimension(250, 200));
+        bonjoPanel.addComponentListener(new ComponentAdapter() {
+            public void componentResized(ComponentEvent e) {
+                System.out.println(e.getComponent().getWidth());
+                bonjoImg.setBounds(
+                        (int)(0f * e.getComponent().getWidth()), (int)(0f * e.getComponent().getHeight()),
+                        (int)(e.getComponent().getWidth()), (int)(0.9f * e.getComponent().getHeight()));
+            }
+        });
 
         add(bonjoPanel);
-
-        // Testing only
-//        displayMessage("Hello World!");
-    }*/
+    }
 }
