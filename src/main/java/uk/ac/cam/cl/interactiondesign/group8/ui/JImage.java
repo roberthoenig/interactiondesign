@@ -23,7 +23,7 @@ public class JImage extends JLabel {
 
     private void onResize() {
         if (image == null) return;
-        if (getWidth() <= 0 || getHeight() <= 0) return;
+        if (getWidth() <= 0 || getHeight() <= 0) return; // Cannot resize to 0
         setIcon(
                 new ImageIcon(
                         ImageScaler.scaleImage(image, getWidth(), getHeight(), resizePolicy)));

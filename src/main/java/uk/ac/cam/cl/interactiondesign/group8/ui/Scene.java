@@ -137,6 +137,7 @@ public class Scene extends JPanel {
         });
         widgetPanel.add(cog);
 
+        // All the manual resizing for weather widgets
         widgetPanel.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
                 character.setBounds(

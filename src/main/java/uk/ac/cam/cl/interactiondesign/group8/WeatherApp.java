@@ -84,7 +84,7 @@ public class WeatherApp extends JFrame {
         locationProvider = new DummyLocationProvider();
         weatherAPI = new OpenWeatherMapAPI(locationProvider);
 
-        // Begin timer
+        // Timer to set start time in DateBar
         timer = new Timer(true);
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -95,6 +95,7 @@ public class WeatherApp extends JFrame {
 
         Runnable callGenerateMessage = this::generateMessage;
 
+        // Timer for Bonjo's messages
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
