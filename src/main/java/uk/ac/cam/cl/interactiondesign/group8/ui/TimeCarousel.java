@@ -12,19 +12,23 @@ import java.io.*;
 public class TimeCarousel extends JPanel {
     private class Slider extends JPanel {
 
+    	private final float SCALE = 25.0f;
+
         private BufferedImage skyImage;
         private JLabel skyLabel;
 
         public void setHeight(int height) {
             skyLabel.setIcon(
                     new ImageIcon(
-                            ImageScaler.scaleImage(skyImage, skyImage.getWidth(), height)));
+                            ImageScaler.scaleImage(skyImage, (int)(skyImage.getWidth() * SCALE), height)));
         }
 
         public void setPosition(float pos) {
             JViewport viewPort = (JViewport) SwingUtilities.getAncestorOfClass(JViewport.class, this);
             if (viewPort != null) {
                 Rectangle view = viewPort.getViewRect();
+                pos += 0.25;
+                if (pos > 1.5f) pos -= 1.5f;
                 view.x = (int) (pos / 1.5f * getWidth());
                 view.y = 0;
 
