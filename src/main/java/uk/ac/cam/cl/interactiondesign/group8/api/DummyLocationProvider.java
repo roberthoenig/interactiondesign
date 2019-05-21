@@ -9,7 +9,7 @@ public class DummyLocationProvider implements LocationProvider {
     }
 
     public DummyLocationProvider() {
-        location = "Cambridge,UK";
+        location = "Alaska,VE";
     }
 
     public DummyLocationProvider(String location) {

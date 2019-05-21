@@ -100,6 +100,6 @@ public class WeatherApp extends JFrame {
             public void run() {
                 callGenerateMessage.run();
             }
-        }, 0, 15000);
+        }, 0, 6000);
     }
 }
