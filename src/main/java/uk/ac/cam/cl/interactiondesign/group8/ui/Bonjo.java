@@ -12,13 +12,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Bonjo extends JPanel implements ICharacter {
-    private JImage bonjoImg;
 
-    //private JLayeredPane messagePanel;
+    private JImage bonjoImg;
     private JLayeredPane messagePanel;
     private JLabel messageText;
     private JImage messageImg;
-    private JLayeredPane bonjoPanel;
 
     private ChatSelector chatSelector;
 
@@ -36,12 +34,9 @@ public class Bonjo extends JPanel implements ICharacter {
         messageText.setText("");
     }
 
-    // Updates the character to wear the clothing
+    // Updates the character to wear the clothing - Not implemented due time constraints
     public void setClothing(EClothing clothing) {
-    //    if (clothing == EClothing.NONE)
-    //        bonjoClothes.setVisible(false);
-    //    else
-     //       bonjoClothes.setVisible(true);
+        return;
     }
 
     public void randomChat(IChatInterface... options) {
@@ -51,10 +46,8 @@ public class Bonjo extends JPanel implements ICharacter {
         displayMessage(result.getMessage());
 
         // Handle the audio
-//        if (result.getAudio() != null) {}
+        // if (result.getAudio() != null) {}
 
-        // Handle the clothing change
-//        if (result.getClothing() != null) {}
     }
 
     public void randomChat(IChatInterface[] options1, IChatInterface... options2) {
@@ -64,14 +57,8 @@ public class Bonjo extends JPanel implements ICharacter {
         randomChat(out.toArray(new IChatInterface[0]));
     }
 
-    public void rescale(int width, int height){
-        messagePanel.setPreferredSize(new Dimension(width*3/10, height/2));
-        //bonjoPanel.setPreferredSize(new Dimension(width*6/10, width*6/10/10*9));
-        messageImg.setMaximumSize(new Dimension(width*3/10, height/2));
-
-        messageText.setFont(new Font(messageText.getFont().getName(), Font.PLAIN, height/30));
-    }
     public Bonjo() {
+
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         setOpaque(false);
 
@@ -80,11 +67,11 @@ public class Bonjo extends JPanel implements ICharacter {
 
         // Panel for Bonjo's messages
         messagePanel = new JLayeredPane();
-        //messagePanel.setLayout(new OverlayLayout(messagePanel));
         messagePanel.setOpaque(false);
         messagePanel.setPreferredSize(new Dimension(250, 200));
         messagePanel.setBackground(new Color(0,0,0,1));
 
+        // Loading the speech bubble image
         BufferedImage messageImage;
         try{
             messageImage = ResourceLoader.loadImage("bonjocomponents/speechbubble.png");
@@ -93,13 +80,9 @@ public class Bonjo extends JPanel implements ICharacter {
         }
         messageImg = new JImage();
         messageImg.setImage(messageImage);
-        //messageImg.setAlignmentX(0.5f);
-        //messageImg.setAlignmentY(0.5f);
-        //messageImg.setMaximumSize(new Dimension(250, 200));
 
+        // Creating the label
         messageText = new JLabel();
-        //messageText.setAlignmentX(0.8f);
-        //messageText.setAlignmentY(0.5f);
 
         messagePanel.add(messageText, JLayeredPane.PALETTE_LAYER);
         messagePanel.add(messageImg, JLayeredPane.DEFAULT_LAYER);
@@ -112,6 +95,7 @@ public class Bonjo extends JPanel implements ICharacter {
             }
         });
 
+        // Code to manage window resizing for the speech bubble and text size
         messagePanel.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
                 messageImg.setBounds(
@@ -124,20 +108,14 @@ public class Bonjo extends JPanel implements ICharacter {
 
             }
         });
-        hideMessage(); // Default hidden
 
+        //Hides message in default
+        hideMessage();
         add(messagePanel);
 
-        // Panel containing Bonjo + Clothes
+        // Panel containing Bonjo
         JLayeredPane bonjoPanel = new JLayeredPane();
-        //bonjoPanel.setLayout(new OverlayLayout(bonjoPanel));
         bonjoPanel.setOpaque(false);
-        //bonjoPanel.setPreferredSize(new Dimension(100, 100));
-
-
-        //jp = new JPanel();
-        //jp.setLayout(new BorderLayout(0, 0));
-        //jp.setOpaque(false);
         BufferedImage img;
         try {
             img = ResourceLoader.loadImage("bonjocomponents/bonjodefault.png");
@@ -147,6 +125,8 @@ public class Bonjo extends JPanel implements ICharacter {
         bonjoImg = new JImage();
         bonjoImg.setImage(img);
 
+        // Clicking handler for Bonjo to say something
+        // If more time was allowed Bonjo could have said something relevant to the weather
         bonjoImg.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -157,8 +137,10 @@ public class Bonjo extends JPanel implements ICharacter {
         bonjoImg.setPreferredSize(new Dimension(250, 200));
 
         bonjoPanel.add(bonjoImg, BorderLayout.CENTER);
-        //bonjoPanel.add(jp);
         bonjoPanel.setPreferredSize(new Dimension(250, 200));
+
+
+        // Code to manage window resizing for Bonjo
         bonjoPanel.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
                 System.out.println(e.getComponent().getWidth());
