@@ -25,8 +25,7 @@ public class Temperature extends JPanel implements Temperatureable {
     public void setTemperatureUnit(UnitConverter.Temp unit) {
         tempLabel.setText(
             UnitConverter.tempToString(unit,
-            UnitConverter.convertTemp(UnitConverter.Temp.K, UnitConverter.Temp.C,
-                currentTemp)));
+            UnitConverter.convertTemp(UnitConverter.Temp.K, unit, currentTemp)));
     }
 
     public void updateTemperature(Settings.Temperature temperature) {
@@ -35,8 +34,6 @@ public class Temperature extends JPanel implements Temperatureable {
             case FAHRENHEIT: setTemperatureUnit(UnitConverter.Temp.F); break; 
         }
     }
-
-
 
     public Temperature(Scene s) {
         scene = s;
