@@ -6,7 +6,7 @@ import java.io.*;
 import java.nio.file.*;
 
 public class Localization {
-    private static String language = "en_UK";
+    private static String language = "en_GB";
     private static JSONObject localizationData;
 
     public static void importLocalizationData(String filename) throws IOException {
