@@ -20,6 +20,8 @@ public class Temperature extends JPanel {
                 temp)));
     }
 
+
+
     public Temperature(Scene s) {
         scene = s;
 
@@ -42,10 +44,13 @@ public class Temperature extends JPanel {
         signPanel.add(signImage, JLayeredPane.DEFAULT_LAYER);
         signPanel.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
-                tempLabel.setBounds(0, 0, e.getComponent().getWidth(), e.getComponent().getHeight());
-
+                //tempLabel.setBounds(0, 0, e.getComponent().getWidth(), e.getComponent().getHeight())
+                tempLabel.setBounds(
+                        (int)(0.3f * e.getComponent().getWidth()), (int)(0.15f * e.getComponent().getHeight()),
+                        (int)(0.6f * e.getComponent().getWidth()), (int)(0.3f * e.getComponent().getHeight()));
                 signImage.setBounds(0, 0, e.getComponent().getWidth(), e.getComponent().getHeight());
-                tempLabel.setLocation((signImage.getWidth()/3), -signImage.getHeight()/5);
+                tempLabel.setFont(new Font(tempLabel.getFont().getName(), Font.BOLD, (int) (0.1f * e.getComponent().getHeight())));
+
             }
         });
         signPanel.setPreferredSize(new Dimension(100, 100));

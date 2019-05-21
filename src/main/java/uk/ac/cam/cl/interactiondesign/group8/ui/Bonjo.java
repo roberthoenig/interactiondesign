@@ -13,17 +13,19 @@ import java.util.Arrays;
 
 public class Bonjo extends JPanel implements ICharacter {
     private JImage bonjoImg;
-    private JImage bonjoClothes;
+
+    //private JLayeredPane messagePanel;
     private JPanel messagePanel;
     private JLabel messageText;
     private JImage messageImg;
+    private JLayeredPane bonjoPanel;
 
     private ChatSelector chatSelector;
 
     // Creates a speech bubble with the message
     public void displayMessage(String message) {
         messagePanel.setOpaque(true);
-        messageText.setText(message);
+        messageText.setText("<html>"+message+"</html>");
         messageImg.setVisible(true);
     }
 
@@ -36,10 +38,10 @@ public class Bonjo extends JPanel implements ICharacter {
 
     // Updates the character to wear the clothing
     public void setClothing(EClothing clothing) {
-        if (clothing == EClothing.NONE)
-            bonjoClothes.setVisible(false);
-        else
-            bonjoClothes.setVisible(true);
+    //    if (clothing == EClothing.NONE)
+    //        bonjoClothes.setVisible(false);
+    //    else
+     //       bonjoClothes.setVisible(true);
     }
 
     public void randomChat(IChatInterface... options) {
@@ -62,6 +64,13 @@ public class Bonjo extends JPanel implements ICharacter {
         randomChat(out.toArray(new IChatInterface[0]));
     }
 
+    public void rescale(int width, int height){
+        messagePanel.setPreferredSize(new Dimension(width*3/10, height/2));
+        //bonjoPanel.setPreferredSize(new Dimension(width*6/10, width*6/10/10*9));
+        messageImg.setMaximumSize(new Dimension(width*3/10, height/2));
+
+        messageText.setFont(new Font(messageText.getFont().getName(), Font.PLAIN, height/30));
+    }
     public Bonjo() {
         setLayout(new FlowLayout(FlowLayout.LEFT, 5, 0));
         setOpaque(false);
@@ -115,9 +124,10 @@ public class Bonjo extends JPanel implements ICharacter {
         JPanel jp = new JPanel();
         jp.setLayout(new BorderLayout(0, 0));
         jp.setOpaque(false);
-        bonjoClothes = new JImage();
-        bonjoClothes.setVisible(false);
-        jp.add(bonjoClothes, BorderLayout.CENTER);
+
+        //bonjoClothes = new JImage();
+        //bonjoClothes.setVisible(false);
+        //jp.add(bonjoClothes, BorderLayout.CENTER);
         bonjoPanel.add(jp);
 
         jp = new JPanel();
@@ -148,4 +158,98 @@ public class Bonjo extends JPanel implements ICharacter {
         // Testing only
 //        displayMessage("Hello World!");
     }
+    /*
+    public Bonjo() {
+
+        setLayout(new FlowLayout(FlowLayout.LEFT, 5, 0));
+        setOpaque(false);
+
+        // Set up the chat ability
+        chatSelector = new ChatSelector("localization/bonjo.json", ChatSelector.LanguageCode.en_GB);
+
+        // Panel for Bonjo's messages
+        messagePanel = new JLayeredPane();
+        //messagePanel.setLayout(new OverlayLayout(messagePanel));
+        messagePanel.setOpaque(false);
+        messagePanel.setPreferredSize(new Dimension(250, 200));
+        //messagePanel.setBackground(new Color(0,0,0,1));
+
+        BufferedImage messageImage;
+        try{
+            messageImage = ResourceLoader.loadImage("bonjocomponents/speechbubble.png");
+        } catch (IOException ioe){
+            throw new RuntimeException(ioe.getMessage());
+        }
+        messageImg = new JImage();
+        messageImg.setImage(messageImage);
+        //messageImg.setAlignmentX(0.5f);
+        //messageImg.setAlignmentY(0.5f);
+        messageImg.setMaximumSize(new Dimension(250, 200));
+
+        messageText = new JLabel();
+        //messageText.setAlignmentX(0.8f);
+        //messageText.setAlignmentY(0.5f);
+        messagePanel.add(messageImg, JLayeredPane.DEFAULT_LAYER);
+        messagePanel.add(messageText, JLayeredPane.PALETTE_LAYER);
+        //messagePanel.setPreferredSize(new Dimension(100, 100));
+
+        // Hide panel onClick
+        messagePanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                hideMessage();
+            }
+        });
+        hideMessage(); // Default hidden
+
+        messagePanel.addComponentListener(new ComponentAdapter() {
+            public void componentResized(ComponentEvent e) {
+                System.out.println("HIII");
+
+            }
+        });
+
+        add(messagePanel);
+
+        // Panel containing Bonjo + Clothes
+        JPanel bonjoPanel = new JPanel();
+        bonjoPanel.setLayout(new OverlayLayout(bonjoPanel));
+        bonjoPanel.setOpaque(false);
+        bonjoPanel.setPreferredSize(new Dimension(100, 100));
+
+        JPanel jp = new JPanel();
+        jp.setLayout(new BorderLayout(0, 0));
+        jp.setOpaque(false);
+
+        bonjoClothes = new JImage();
+        bonjoClothes.setVisible(false);
+        jp.add(bonjoClothes, BorderLayout.CENTER);
+        bonjoPanel.add(jp);
+        JPanel jp = new JPanel();
+        jp.setLayout(new BorderLayout(0, 0));
+        jp.setOpaque(false);
+        BufferedImage img;
+        try {
+            img = ResourceLoader.loadImage("bonjocomponents/bonjodefault.png");
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        bonjoImg = new JImage();
+        bonjoImg.setImage(img);
+        bonjoImg.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                displayMessage("Hello World!");
+            }
+        });
+
+
+        jp.add(bonjoImg, BorderLayout.CENTER);
+        bonjoPanel.add(jp);
+
+        add(bonjoPanel);
+
+        // Testing only
+//        displayMessage("Hello World!");
+    }*/
 }
