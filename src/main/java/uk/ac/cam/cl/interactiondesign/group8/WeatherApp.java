@@ -97,7 +97,7 @@ public class WeatherApp extends JFrame {
             public void run() {
                 dateBar.updateTime();
             }
-        }, 0, 180000);
+        }, 0, 1000);
 
         Runnable callGenerateMessage = this::generateMessage;
 
