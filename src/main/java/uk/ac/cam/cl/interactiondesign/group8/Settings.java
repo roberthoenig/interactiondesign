@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import uk.ac.cam.cl.interactiondesign.group8.utils.Temperatureable;
 import uk.ac.cam.cl.interactiondesign.group8.utils.Timeable;
 
+/* Stores settings configuration for temperature and time units. Use the observable pattern
+to register hooks that get called whenever the settings change. */
 public class Settings {
     static public ArrayList<Timeable> timeables = new ArrayList<Timeable>();
     static public ArrayList<Temperatureable> temperatureables = new ArrayList<Temperatureable>();

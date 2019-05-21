@@ -1,20 +1,21 @@
 package uk.ac.cam.cl.interactiondesign.group8.ui;
 
-import uk.ac.cam.cl.interactiondesign.group8.utils.*;
+import uk.ac.cam.cl.interactiondesign.group8.utils.ResourceLoader;
 
 import javax.swing.*;
-import java.awt.image.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
-import java.lang.reflect.Array;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Bonjo extends JPanel implements ICharacter {
     private JImage bonjoImg;
 
-    //private JLayeredPane messagePanel;
     private JLayeredPane messagePanel;
     private JLabel messageText;
     private JImage messageImg;
@@ -71,6 +72,7 @@ public class Bonjo extends JPanel implements ICharacter {
 
         messageText.setFont(new Font(messageText.getFont().getName(), Font.PLAIN, height/30));
     }
+
     public Bonjo() {
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         setOpaque(false);

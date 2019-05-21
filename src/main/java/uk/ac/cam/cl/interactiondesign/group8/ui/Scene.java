@@ -8,6 +8,7 @@ import java.io.*;
 import uk.ac.cam.cl.interactiondesign.group8.Settings;
 import uk.ac.cam.cl.interactiondesign.group8.utils.*;
 
+/* Main view. Contains main interface.*/
 public class Scene extends JPanel {
     private Cog cog;
     private Bonjo character;
@@ -139,6 +140,7 @@ public class Scene extends JPanel {
 
         // All the manual resizing for weather widgets
         widgetPanel.addComponentListener(new ComponentAdapter() {
+            // Scale components dynamically.
             public void componentResized(ComponentEvent e) {
                 character.setBounds(
                         (int)(0.384f * e.getComponent().getWidth()), (int)(0.588f * e.getComponent().getHeight()),
