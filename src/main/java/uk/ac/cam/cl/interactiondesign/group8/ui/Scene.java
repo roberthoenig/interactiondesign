@@ -18,7 +18,7 @@ public class Scene extends JPanel {
     private WindSock windSock;
 
     // Widget getters
-    public ICharacter getCharacter() {
+    public Bonjo getCharacter() {
         return character;
     }
 
@@ -39,8 +39,8 @@ public class Scene extends JPanel {
     }
 
     // Sets the dynamic weather widget
-    public void setWeather(EWeather w) {
-        switch (w) {
+    public void setWeather(EWeather... w) {
+        switch (w[0]) {
             case THUNDERSTORM:
                 weather = new StormCloud(this);
                 break;

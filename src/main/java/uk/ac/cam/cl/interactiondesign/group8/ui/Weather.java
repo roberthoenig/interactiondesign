@@ -1,6 +1,6 @@
 package uk.ac.cam.cl.interactiondesign.group8.ui;
 
-public class Weather {
+public abstract class Weather {
     protected Scene scene;
 
     public Weather(Scene s) {

@@ -1,5 +1,6 @@
 package uk.ac.cam.cl.interactiondesign.group8.api;
 
+import uk.ac.cam.cl.interactiondesign.group8.ui.ETemperature;
 import uk.ac.cam.cl.interactiondesign.group8.ui.EWeather;
 
 import java.util.Date;
@@ -28,11 +29,13 @@ public interface WeatherAPI {
         private final double currentTemperature;        // current temperature in kelvin
         private final EWeather[] currentWeather;        // current weather as an array of conditions
         private final double windSpeed;                 // current wind speed in m/s
+        private final ETemperature currentWarmth;       // a current warmth enum
 
-        WeatherData(double currentTemperature, List<EWeather> currentWeather, double windSpeed) {
+        WeatherData(double currentTemperature, List<EWeather> currentWeather, double windSpeed, ETemperature currentWarmth) {
             this.currentTemperature = currentTemperature;
             this.currentWeather = currentWeather.toArray(new EWeather[0]);
             this.windSpeed = windSpeed;
+            this.currentWarmth = currentWarmth;
         }
 
         public double getCurrentTemperature() {
@@ -45,6 +48,10 @@ public interface WeatherAPI {
 
         public double getWindSpeed() {
             return windSpeed;
+        }
+
+        public ETemperature getCurrentTemperatureState() {
+            return currentWarmth;
         }
     }
 }

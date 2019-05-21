@@ -5,6 +5,7 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import uk.ac.cam.cl.interactiondesign.group8.ui.ETemperature;
 import uk.ac.cam.cl.interactiondesign.group8.ui.EWeather;
 
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ public class OpenWeatherMapAPI implements WeatherAPI {
             JSONArray weatherDataArray = currentWeather.getObject().getJSONArray("weather");
             List<EWeather> weatherList = generateWeatherList(weatherDataArray);
 
-            return new WeatherData(kelvinTemp, weatherList, windSpeed);
+            return new WeatherData(kelvinTemp, weatherList, windSpeed, ETemperature.getTempFromKelvin(kelvinTemp));
         } catch (UnirestException e) {
             throw new UnableToGetWeatherException(e);
         }
@@ -128,7 +129,7 @@ public class OpenWeatherMapAPI implements WeatherAPI {
                             weatherList = generateWeatherList(lastWeather);
                         }
 
-                        return new WeatherData(kelvinTemp, weatherList, windSpeed);
+                        return new WeatherData(kelvinTemp, weatherList, windSpeed, ETemperature.getTempFromKelvin(kelvinTemp));
                     }
                 }
 
@@ -164,7 +165,7 @@ public class OpenWeatherMapAPI implements WeatherAPI {
             } else if (id == 804) {
                 weatherList.add(EWeather.OVERCAST);
             } else {
-                System.out.println("ID '" + id + "' should be clear.");
+//                System.out.println("ID '" + id + "' should be clear.");
                 weatherList.add(EWeather.CLEAR);
             }
         }

@@ -1,6 +1,5 @@
 package uk.ac.cam.cl.interactiondesign.group8.utils;
 
-import com.mashape.unirest.http.JsonNode;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import uk.ac.cam.cl.interactiondesign.group8.*;
@@ -32,10 +31,8 @@ public class ResourceLoader {
 
     // As before but converts to a BufferedImage
     public static BufferedImage loadImage(String filename) throws IOException {
-        File tempFile = loadResource(filename);
-
         try {
-            return ImageIO.read(tempFile);
+            return ImageIO.read(loadResource(filename));
         } catch (IOException e) {
             throw new IOException("Failed to load image: '" + filename + "'");
         }

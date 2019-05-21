@@ -7,6 +7,9 @@ import java.awt.image.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Bonjo extends JPanel implements ICharacter {
     private JImage bonjoImg;
@@ -14,6 +17,8 @@ public class Bonjo extends JPanel implements ICharacter {
     private JPanel messagePanel;
     private JLabel messageText;
     private JImage messageImg;
+
+    private ChatSelector chatSelector;
 
     // Creates a speech bubble with the message
     public void displayMessage(String message) {
@@ -37,9 +42,32 @@ public class Bonjo extends JPanel implements ICharacter {
             bonjoClothes.setVisible(true);
     }
 
+    public void randomChat(IChatInterface... options) {
+        ChatSelector.Result result = chatSelector.getChatMessage(options);
+
+        // Handle the text message
+        displayMessage(result.getMessage());
+
+        // Handle the audio
+//        if (result.getAudio() != null) {}
+
+        // Handle the clothing change
+//        if (result.getClothing() != null) {}
+    }
+
+    public void randomChat(IChatInterface[] options1, IChatInterface... options2) {
+        var out = new ArrayList<>(Arrays.asList(options1));
+        out.addAll(Arrays.asList(options2));
+
+        randomChat(out.toArray(new IChatInterface[0]));
+    }
+
     public Bonjo() {
         setLayout(new FlowLayout(FlowLayout.LEFT, 5, 0));
         setOpaque(false);
+
+        // Set up the chat ability
+        chatSelector = new ChatSelector("localization/bonjo.json", ChatSelector.LanguageCode.en_GB);
 
         // Panel for Bonjo's messages
         messagePanel = new JPanel();
@@ -118,6 +146,6 @@ public class Bonjo extends JPanel implements ICharacter {
         add(bonjoPanel);
 
         // Testing only
-        displayMessage("Hello World!");
+//        displayMessage("Hello World!");
     }
 }

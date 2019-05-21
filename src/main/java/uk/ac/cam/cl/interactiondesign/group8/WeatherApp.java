@@ -25,14 +25,34 @@ public class WeatherApp extends JFrame {
 
     private Timer timer;
 
+    private Date currentTime;
+
+    // State
+    private EWeather[] weatherState;
+    private ETemperature temperatureState;
+
     public void setTime(Date time) {
+        currentTime = time;
+
         try {
             scene.getTimeCarousel().setTime(time);
             // Get the weather from the API and update the UI
-            scene.getTemperature().setTemperature((int)weatherAPI.getWeatherAtTime(time).getCurrentTemperature());
-            scene.getWindSock().setWindSpeed((int)weatherAPI.getWeatherAtTime(time).getWindSpeed());
-        } catch (WeatherAPI.UnableToGetWeatherException e) {
+            WeatherAPI.WeatherData apiData = weatherAPI.getWeatherAtTime(time);
+
+            scene.getTemperature().setTemperature((int) apiData.getCurrentTemperature());
+            scene.setWeather(apiData.getCurrentWeather());
+
+            temperatureState = apiData.getCurrentTemperatureState();
+            weatherState = apiData.getCurrentWeather();
+        } catch (WeatherAPI.UnableToGetWeatherException ignored) {}
+    }
+
+    public void generateMessage() {
+        if (weatherState == null || temperatureState == null) {
+            System.err.println("Unexpected lack of state when preparing message!");
+            return;
         }
+        scene.getCharacter().randomChat(weatherState, temperatureState, ETime.getTime(currentTime));
     }
 
     public WeatherApp() {
@@ -44,7 +64,7 @@ public class WeatherApp extends JFrame {
         } catch (IOException e) {
             throw new RuntimeException("Failed to load localization data!");
         }
-        Localization.setLanguage("en_UK");
+        Localization.setLanguage("en_GB");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(new Dimension(400, 300));
@@ -78,5 +98,14 @@ public class WeatherApp extends JFrame {
                 dateBar.updateTime();
             }
         }, 0, 180000);
+
+        Runnable callGenerateMessage = this::generateMessage;
+
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                callGenerateMessage.run();
+            }
+        }, 0, 6000);
     }
 }
