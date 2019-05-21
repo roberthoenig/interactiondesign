@@ -94,9 +94,11 @@ public class Scene extends JPanel {
         widgetPanel.setOpaque(false);
 
         character = new Bonjo();
+
         widgetPanel.add(character);
 
         temperature = new Temperature(this);
+        
         widgetPanel.add(temperature);
 
         tree = new Tree(this);
@@ -139,7 +141,7 @@ public class Scene extends JPanel {
             public void componentResized(ComponentEvent e) {
                 character.setBounds(
                         (int)(0.384f * e.getComponent().getWidth()), (int)(0.588f * e.getComponent().getHeight()),
-                        (int)(0.708f * e.getComponent().getWidth()), (int)(0.960f * e.getComponent().getHeight()));
+                        (int)(0.308f * e.getComponent().getWidth()), (int)(0.360f * e.getComponent().getHeight()));
                 temperature.setBounds(
                         (int)(0.725f * e.getComponent().getWidth()), (int)(0.593f * e.getComponent().getHeight()),
                         (int)(0.250f * e.getComponent().getWidth()), (int)(0.310f * e.getComponent().getHeight()));
@@ -153,6 +155,7 @@ public class Scene extends JPanel {
                 windSock.setBounds(
                         (int)(0.765f * e.getComponent().getWidth()), (int)(0.257f * e.getComponent().getHeight()),
                         (int)(0.128f * e.getComponent().getWidth()), (int)(0.294f * e.getComponent().getHeight()));
+
             }
         });
 
